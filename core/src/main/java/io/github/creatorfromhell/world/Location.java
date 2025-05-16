@@ -1,4 +1,4 @@
-package io.github.creatorfromhell.entity;
+package io.github.creatorfromhell.world;
 /*
  * The New Economy
  * Copyright (C) 2025 Daniel "creatorfromhell" Vidmar
@@ -17,46 +17,62 @@ package io.github.creatorfromhell.entity;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import io.github.creatorfromhell.world.Location;
-
 /**
- * Entity
+ * Location
  *
  * @author creatorfromhell
  * @since 1.0.0.0
  */
-public class Entity {
+public class Location {
 
-  protected Location location = Location.ZERO;
-  protected float speed = 150f;
+  public static final Location ZERO = new Location(0, 0);
 
-  public Location location() {
+    private int x;
+    private int y;
 
-    return location;
-  }
+    public Location(final int x, final int y) {
 
-  public void location(final Location location) {
+        this.x = x;
+        this.y = y;
+    }
 
-    this.location = location;
-  }
+    public int x() {
 
-  public float speed() {
+        return x;
+    }
 
-    return speed;
-  }
+    public void x(final int x) {
 
-  public void speed(final float speed) {
+        this.x = x;
+    }
 
-    this.speed = speed;
-  }
+    public int y() {
 
-  public void accelerate(final float speed) {
+        return y;
+    }
 
-    this.speed += speed;
-  }
+    public void y(final int y) {
 
-  public void decelerate(final float speed) {
+        this.y = y;
+    }
 
-    this.speed -= speed;
-  }
+    public void addY(final int y) {
+
+      this.y += y;
+    }
+
+    public void subY(final int y) {
+
+      this.y -= y;
+    }
+
+    public void addX(final int x) {
+
+      this.x += x;
+    }
+
+    public void subX(final int x) {
+
+      this.x -= x;
+    }
 }

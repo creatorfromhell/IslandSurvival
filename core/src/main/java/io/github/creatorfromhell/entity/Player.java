@@ -17,46 +17,55 @@ package io.github.creatorfromhell.entity;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import io.github.creatorfromhell.world.Location;
+import com.badlogic.gdx.graphics.Camera;
+import io.github.creatorfromhell.client.CameraController;
+import io.github.creatorfromhell.client.InputHandler;
 
 /**
- * Entity
+ * Player
  *
  * @author creatorfromhell
  * @since 1.0.0.0
  */
-public class Entity {
+public class Player extends Entity {
 
-  protected Location location = Location.ZERO;
-  protected float speed = 150f;
+  private InputHandler handler;
+  private CameraController cameraController;
+  private boolean debug = false;
 
-  public Location location() {
+  public Player() {
 
-    return location;
+    this.handler = new InputHandler(this);
+    this.cameraController = new CameraController(this);
   }
 
-  public void location(final Location location) {
+  public InputHandler handler() {
 
-    this.location = location;
+    return handler;
   }
 
-  public float speed() {
+  public void handler(final InputHandler handler) {
 
-    return speed;
+    this.handler = handler;
   }
 
-  public void speed(final float speed) {
+  public CameraController cameraController() {
 
-    this.speed = speed;
+    return cameraController;
   }
 
-  public void accelerate(final float speed) {
+  public void cameraController(final CameraController cameraController) {
 
-    this.speed += speed;
+    this.cameraController = cameraController;
   }
 
-  public void decelerate(final float speed) {
+  public boolean debug() {
 
-    this.speed -= speed;
+    return debug;
+  }
+
+  public void debug(final boolean debug) {
+
+    this.debug = debug;
   }
 }
