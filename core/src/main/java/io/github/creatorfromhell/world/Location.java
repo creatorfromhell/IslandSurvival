@@ -5,58 +5,58 @@ package io.github.creatorfromhell.world;
  * Location
  *
  * @author creatorfromhell
- * @since 1.0.0.0
+ * @since 0.0.1.0
  */
 public class Location {
 
   public static final Location ZERO = new Location(0, 0);
 
-    private int x;
-    private int y;
+  private int x;
+  private int y;
 
-    public Location(final int x, final int y) {
+  public Location(final int x, final int y) {
 
-        this.x = x;
-        this.y = y;
-    }
+    this.x = x;
+    this.y = y;
+  }
 
-    public int x() {
+  public int x() {
 
-        return x;
-    }
+    return x;
+  }
 
-    public void x(final int x) {
+  public void x(final int x) {
 
-        this.x = x;
-    }
+    this.x = x;
+  }
 
-    public int y() {
+  public int y() {
 
-        return y;
-    }
+    return y;
+  }
 
-    public void y(final int y) {
+  public void y(final int y) {
 
-        this.y = y;
-    }
+    this.y = y;
+  }
 
-    public void addY(final int y) {
+  public void addY(final int y) {
 
-      this.y += y;
-    }
+    this.y += y;
+  }
 
-    public void subY(final int y) {
+  public void subY(final int y) {
 
-      this.y -= y;
-    }
+    this.y -= y;
+  }
 
-    public void addX(final int x) {
+  public void addX(final int x) {
 
-      this.x += x;
-    }
+    this.x += x;
+  }
 
-    public void subX(final int x) {
+  public void subX(final int x) {
 
-      this.x -= x;
-    }
+    this.x -= x;
+  }
 }

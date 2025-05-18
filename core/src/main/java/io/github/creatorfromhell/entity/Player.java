@@ -1,7 +1,6 @@
 package io.github.creatorfromhell.entity;
 
 
-import com.badlogic.gdx.graphics.Camera;
 import io.github.creatorfromhell.client.CameraController;
 import io.github.creatorfromhell.client.InputHandler;
 
@@ -9,7 +8,7 @@ import io.github.creatorfromhell.client.InputHandler;
  * Player
  *
  * @author creatorfromhell
- * @since 1.0.0.0
+ * @since 0.0.1.0
  */
 public class Player extends Entity {
 

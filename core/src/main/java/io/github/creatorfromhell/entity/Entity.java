@@ -7,7 +7,7 @@ import io.github.creatorfromhell.world.Location;
  * Entity
  *
  * @author creatorfromhell
- * @since 1.0.0.0
+ * @since 0.0.1.0
  */
 public class Entity {
 

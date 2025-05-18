@@ -4,8 +4,10 @@ package io.github.creatorfromhell.world;
 /**
  * World
  *
- * @since 1.0.0.0
  * @author creatorfromhell
+ * @since 0.0.1.0
  */
 public class World {
+
+
 }
