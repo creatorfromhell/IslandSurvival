@@ -1,4 +1,4 @@
-package io.github.creatorfromhell.client.render;
+package io.github.creatorfromhell.util.location;
 /*
  * IslandSurvival
  * Copyright (C) 2025 Daniel "creatorfromhell" Vidmar
@@ -17,30 +17,16 @@ package io.github.creatorfromhell.client.render;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 /**
- * UIComponent represents a component for the UI, which will be used to render UI components.
+ * Direction
  *
  * @author creatorfromhell
  * @since 0.0.1.0
  */
-public interface UIComponent {
+public enum Direction {
 
-  /**
-   * Creates a new UI component. This method is used to initialize a new instance of the UI component.
-   */
-  void create();
-
-  /**
-   * Renders the UI component using the provided SpriteBatch.
-   *
-   * @param batch the SpriteBatch used to render the UI component
-   */
-  void render(SpriteBatch batch);
-
-  /**
-   * Releases any resources held by the UI component.
-   */
-  void dispose();
+  NORTH,
+  SOUTH,
+  WEST,
+  EAST;
 }

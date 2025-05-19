@@ -34,9 +34,9 @@ public class GameManager {
 
   private static GameManager instance;
 
-  private final AssetManager assetManager;
+  private final EntityManager entityManager;
 
-  private Player player;
+  private final AssetManager assetManager;
 
   private WorldGenerator worldGenerator;
 
@@ -46,18 +46,18 @@ public class GameManager {
 
     instance = this;
 
+    entityManager = new EntityManager();
+
     this.assetManager = new AssetManager();
 
     this.windowSize = windowSize;
-
-    this.player = new Player();
 
     this.worldGenerator = new WorldGenerator(12345L);
   }
 
   public void create() {
 
-    player.cameraController().init();
+    entityManager.player().cameraController().init();
 
     assetManager.create();
 
@@ -68,9 +68,9 @@ public class GameManager {
 
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-    player.handler().render();
+    entityManager.player().handler().render();
 
-    player.cameraController().render();
+    entityManager.player().cameraController().render();
 
     ScreenUtils.clear(0, 0, 0, 1);
 
@@ -87,6 +87,11 @@ public class GameManager {
     return instance;
   }
 
+  public EntityManager entityManager() {
+
+    return entityManager;
+  }
+
   public AssetManager assetManager() {
 
     return assetManager;
@@ -94,7 +99,7 @@ public class GameManager {
 
   public Player player() {
 
-    return player;
+    return entityManager.player();
   }
 
   public WorldGenerator worldGenerator() {

@@ -1,4 +1,4 @@
-package io.github.creatorfromhell.client.render;
+package io.github.creatorfromhell.client.render.ui;
 /*
  * IslandSurvival
  * Copyright (C) 2025 Daniel "creatorfromhell" Vidmar
@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import io.github.creatorfromhell.GameManager;
+import io.github.creatorfromhell.client.render.Renderable;
 import io.github.creatorfromhell.entity.Player;
 import io.github.creatorfromhell.world.biome.Biome;
 
@@ -33,7 +34,7 @@ import static io.github.creatorfromhell.registry.TileTypeRegistry.TILE_SIZE;
  * @author creatorfromhell
  * @since 0.0.1.0
  */
-public class BiomeBordersComponent implements UIComponent {
+public class BiomeBordersComponent implements Renderable {
 
   private BitmapFont font;
 

@@ -1,4 +1,4 @@
-package io.github.creatorfromhell.client.render;
+package io.github.creatorfromhell.client.render.ui;
 /*
  * IslandSurvival
  * Copyright (C) 2025 Daniel "creatorfromhell" Vidmar
@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import io.github.creatorfromhell.GameManager;
+import io.github.creatorfromhell.client.render.Renderable;
 import io.github.creatorfromhell.entity.Player;
 import io.github.creatorfromhell.world.biome.Biome;
 import io.github.creatorfromhell.world.tile.Tile;
@@ -34,7 +35,7 @@ import static io.github.creatorfromhell.registry.TileTypeRegistry.TILE_SIZE;
  * @author creatorfromhell
  * @since 0.0.1.0
  */
-public class DebugComponent implements UIComponent {
+public class DebugComponent implements Renderable {
 
   private BitmapFont font;
 
@@ -71,6 +72,7 @@ public class DebugComponent implements UIComponent {
       font.draw(batch, "Tile: " + currentTile.id(), player.cameraController().camera().position.x - Gdx.graphics.getWidth() / 2f * player.cameraController().camera().zoom + 10, player.cameraController().camera().position.y + Gdx.graphics.getHeight() / 2f * player.cameraController().camera().zoom - 30);
       font.draw(batch, "Biome: " + currentBiome.id(), player.cameraController().camera().position.x - Gdx.graphics.getWidth() / 2f * player.cameraController().camera().zoom + 10, player.cameraController().camera().position.y + Gdx.graphics.getHeight() / 2f * player.cameraController().camera().zoom - 50);
       font.draw(batch, "Speed: " + player.speed(), player.cameraController().camera().position.x - Gdx.graphics.getWidth() / 2f * player.cameraController().camera().zoom + 10, player.cameraController().camera().position.y + Gdx.graphics.getHeight() / 2f * player.cameraController().camera().zoom - 70);
+      font.draw(batch, "Direction: " + player.direction().name(), player.cameraController().camera().position.x - Gdx.graphics.getWidth() / 2f * player.cameraController().camera().zoom + 10, player.cameraController().camera().position.y + Gdx.graphics.getHeight() / 2f * player.cameraController().camera().zoom - 90);
     }
   }
 

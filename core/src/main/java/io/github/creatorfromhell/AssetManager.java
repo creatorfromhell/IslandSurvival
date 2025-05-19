@@ -21,11 +21,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import io.github.creatorfromhell.client.render.BiomeBordersComponent;
-import io.github.creatorfromhell.client.render.DebugComponent;
-import io.github.creatorfromhell.client.render.UIComponent;
-import io.github.creatorfromhell.client.render.WorldComponent;
+import io.github.creatorfromhell.client.render.Renderable;
+import io.github.creatorfromhell.client.render.ui.BiomeBordersComponent;
+import io.github.creatorfromhell.client.render.ui.DebugComponent;
+import io.github.creatorfromhell.client.render.ui.WorldComponent;
+import io.github.creatorfromhell.entity.Entity;
 
 import java.util.LinkedHashMap;
 
@@ -41,10 +41,8 @@ public class AssetManager {
   private Texture playerSheet;
   private Texture tilesheet;
 
-  private TextureRegion[] playerRegions;
-
   //we use a linked hashmap since rendering is very order driven and we need to render in the correct order.
-  public final LinkedHashMap<String, UIComponent> uiComponents = new LinkedHashMap<>();
+  public final LinkedHashMap<String, Renderable> uiComponents = new LinkedHashMap<>();
 
   public AssetManager() {
 
@@ -58,23 +56,19 @@ public class AssetManager {
     batch = new SpriteBatch();
 
     playerSheet = new Texture(Gdx.files.internal("character.png"));
-    final TextureRegion[][] playerSplit = TextureRegion.split(playerSheet, 48, 48);
-    playerRegions = new TextureRegion[8 * 24];
-    int index = 0;
-    for(int i = 0; i < 24; i++) {
-
-      for(int j = 0; j < 8; j++) {
-
-        playerRegions[index++] = playerSplit[i][j];
-      }
-    }
-
 
     tilesheet = new Texture(Gdx.files.internal("tiles/tilesheet_v2.png"));
 
-    for(final UIComponent uiComponent : uiComponents.values()) {
+    for(final Renderable uiComponent : uiComponents.values()) {
 
       uiComponent.create();
+    }
+
+    for(final Entity entity : GameManager.instance().entityManager().entities.values()) {
+
+      if(entity.renderer().isPresent()) {
+        entity.renderer().get().create();
+      }
     }
   }
 
@@ -84,7 +78,7 @@ public class AssetManager {
     batch.setProjectionMatrix(GameManager.instance().player().cameraController().camera().combined);
     batch.begin();
 
-    for(final UIComponent uiComponent : uiComponents.values()) {
+    for(final Renderable uiComponent : uiComponents.values()) {
 
       uiComponent.render(batch);
 
@@ -92,23 +86,36 @@ public class AssetManager {
       batch.setColor(Color.WHITE);
     }
 
-    //TODO: Player renderer
-    batch.draw(playerRegions[0], GameManager.instance().player().location().x(), GameManager.instance().player().location().y(), 40, 56);
+    for(final Entity entity : GameManager.instance().entityManager().entities.values()) {
+
+      if(entity.renderer().isPresent()) {
+        entity.renderer().get().render(batch);
+
+        //reset batch color to prevent color bleeding.
+        batch.setColor(Color.WHITE);
+      }
+    }
 
     batch.end();
   }
 
   public void dispose() {
 
-    for(final UIComponent uiComponent : uiComponents.values()) {
+    for(final Renderable uiComponent : uiComponents.values()) {
 
       uiComponent.dispose();
+    }
+
+    for(final Entity entity : GameManager.instance().entityManager().entities.values()) {
+
+      if(entity.renderer().isPresent()) {
+        entity.renderer().get().dispose();
+      }
     }
 
     batch.dispose();
     playerSheet.dispose();
     tilesheet.dispose();
-    playerRegions = null;
   }
 
 
@@ -125,10 +132,5 @@ public class AssetManager {
   public Texture tilesheet() {
 
     return tilesheet;
-  }
-
-  public TextureRegion[] playerRegions() {
-
-    return playerRegions;
   }
 }

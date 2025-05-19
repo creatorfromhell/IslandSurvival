@@ -1,4 +1,4 @@
-package io.github.creatorfromhell.world;
+package io.github.creatorfromhell.util.location;
 
 
 /**

@@ -3,6 +3,7 @@ package io.github.creatorfromhell.entity;
 
 import io.github.creatorfromhell.client.CameraController;
 import io.github.creatorfromhell.client.InputHandler;
+import io.github.creatorfromhell.client.render.entity.PlayerRenderer;
 
 /**
  * Player
@@ -20,6 +21,7 @@ public class Player extends Entity {
 
     this.handler = new InputHandler(this);
     this.cameraController = new CameraController(this);
+    this.renderer = new PlayerRenderer();
   }
 
   public InputHandler handler() {

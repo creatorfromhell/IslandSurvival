@@ -1,4 +1,4 @@
-package io.github.creatorfromhell.client.render;
+package io.github.creatorfromhell.client.render.ui;
 /*
  * IslandSurvival
  * Copyright (C) 2025 Daniel "creatorfromhell" Vidmar
@@ -18,9 +18,9 @@ package io.github.creatorfromhell.client.render;
  */
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import io.github.creatorfromhell.GameManager;
+import io.github.creatorfromhell.client.render.Renderable;
 import io.github.creatorfromhell.entity.Player;
 import io.github.creatorfromhell.world.biome.Biome;
 import io.github.creatorfromhell.world.tile.Tile;
@@ -33,7 +33,7 @@ import static io.github.creatorfromhell.registry.TileTypeRegistry.TILE_SIZE;
  * @author creatorfromhell
  * @since 0.0.1.0
  */
-public class WorldComponent implements UIComponent {
+public class WorldComponent implements Renderable {
 
   /**
    * Creates a new UI component. This method is used to initialize a new instance of the UI
