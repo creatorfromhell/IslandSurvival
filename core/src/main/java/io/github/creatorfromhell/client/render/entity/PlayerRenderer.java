@@ -32,6 +32,16 @@ public class PlayerRenderer implements Renderable {
 
   private TextureRegion[] playerRegions;
 
+  private TextureRegion playerRegion() {
+
+    switch(GameManager.instance().player().direction()) {
+      case NORTH -> { return playerRegions[8]; }
+      case EAST -> { return playerRegions[16]; }
+      case WEST -> { return playerRegions[24]; }
+      default -> { return playerRegions[0]; }
+    }
+  }
+
   /**
    * This method is used to create a new instance of an object. It should be implemented in classes
    * that require initialization.
@@ -58,7 +68,8 @@ public class PlayerRenderer implements Renderable {
    */
   @Override
   public void render(final SpriteBatch batch) {
-    batch.draw(playerRegions[0], GameManager.instance().player().location().x(), GameManager.instance().player().location().y(), 40, 56);
+
+    batch.draw(playerRegion(), GameManager.instance().player().location().x(), GameManager.instance().player().location().y(), 40, 56);
   }
 
   /**

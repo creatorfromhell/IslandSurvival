@@ -4,6 +4,7 @@ package io.github.creatorfromhell.client;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import io.github.creatorfromhell.entity.Player;
+import io.github.creatorfromhell.util.location.Direction;
 
 /**
  * InputHandler
@@ -24,10 +25,22 @@ public class InputHandler {
 
     final float dt = Gdx.graphics.getDeltaTime();
     //our player movement using WASD
-    if(Gdx.input.isKeyPressed(Input.Keys.W)) player.location().addY((int)(player.speed() * dt));
-    if(Gdx.input.isKeyPressed(Input.Keys.S)) player.location().subY((int)(player.speed() * dt));
-    if(Gdx.input.isKeyPressed(Input.Keys.A)) player.location().subX((int)(player.speed() * dt));
-    if(Gdx.input.isKeyPressed(Input.Keys.D)) player.location().addX((int)(player.speed() * dt));
+    if(Gdx.input.isKeyPressed(Input.Keys.W)) {
+      player.location().addY((int)(player.speed() * dt));
+      player.direction(Direction.NORTH);
+    }
+    if(Gdx.input.isKeyPressed(Input.Keys.S)) {
+      player.location().subY((int)(player.speed() * dt));
+      player.direction(Direction.SOUTH);
+    }
+    if(Gdx.input.isKeyPressed(Input.Keys.A)) {
+      player.location().subX((int)(player.speed() * dt));
+      player.direction(Direction.WEST);
+    }
+    if(Gdx.input.isKeyPressed(Input.Keys.D)) {
+      player.location().addX((int)(player.speed() * dt));
+      player.direction(Direction.EAST);
+    }
     if(Gdx.input.isKeyJustPressed(Input.Keys.TAB)) player.debug(!player.debug());
 
     if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
