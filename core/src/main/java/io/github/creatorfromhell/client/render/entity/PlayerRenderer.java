@@ -47,6 +47,11 @@ public class PlayerRenderer implements Renderable {
 
   float animationTime;
 
+  /**
+   * Determines the appropriate TextureRegion to display for the player based on their direction and movement state.
+   *
+   * @return the TextureRegion to display for the player
+   */
   private TextureRegion playerRegion() {
 
     final Player player = GameManager.instance().player();
@@ -79,6 +84,13 @@ public class PlayerRenderer implements Renderable {
     }
   }
 
+  /**
+   * Retrieves a sequence of TextureRegions from the playerRegions array based on the specified start index and length.
+   *
+   * @param start the starting index in the playerRegions array
+   * @param length the number of TextureRegions to retrieve
+   * @return an array of TextureRegions containing the specified sequence of frames
+   */
   private TextureRegion[] animationFrames(final int start, final int length) {
 
     final TextureRegion[] frames = new TextureRegion[length];
