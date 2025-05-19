@@ -24,23 +24,34 @@ public class InputHandler {
   public void render() {
 
     final float dt = Gdx.graphics.getDeltaTime();
+    boolean isMoving = false;
+
     //our player movement using WASD
     if(Gdx.input.isKeyPressed(Input.Keys.W)) {
       player.location().addY((int)(player.speed() * dt));
+
       player.direction(Direction.NORTH);
+      isMoving = true;
     }
+
     if(Gdx.input.isKeyPressed(Input.Keys.S)) {
       player.location().subY((int)(player.speed() * dt));
       player.direction(Direction.SOUTH);
+      isMoving = true;
     }
     if(Gdx.input.isKeyPressed(Input.Keys.A)) {
       player.location().subX((int)(player.speed() * dt));
       player.direction(Direction.WEST);
+      isMoving = true;
     }
     if(Gdx.input.isKeyPressed(Input.Keys.D)) {
       player.location().addX((int)(player.speed() * dt));
       player.direction(Direction.EAST);
+      isMoving = true;
     }
+
+    player.moving(isMoving);
+
     if(Gdx.input.isKeyJustPressed(Input.Keys.TAB)) player.debug(!player.debug());
 
     if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {

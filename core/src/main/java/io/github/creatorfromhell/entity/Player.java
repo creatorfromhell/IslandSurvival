@@ -17,6 +17,8 @@ public class Player extends Entity {
   private CameraController cameraController;
   private boolean debug = false;
 
+  private boolean moving = false;
+
   public Player() {
 
     this.handler = new InputHandler(this);
@@ -52,5 +54,15 @@ public class Player extends Entity {
   public void debug(final boolean debug) {
 
     this.debug = debug;
+  }
+
+  public boolean moving() {
+
+    return moving;
+  }
+
+  public void moving(final boolean moving) {
+
+    this.moving = moving;
   }
 }

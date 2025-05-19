@@ -17,10 +17,13 @@ package io.github.creatorfromhell.client.render.entity;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import io.github.creatorfromhell.GameManager;
 import io.github.creatorfromhell.client.render.Renderable;
+import io.github.creatorfromhell.entity.Player;
 
 /**
  * PlayerRenderer
@@ -30,16 +33,65 @@ import io.github.creatorfromhell.client.render.Renderable;
  */
 public class PlayerRenderer implements Renderable {
 
+  public Animation<TextureRegion> northWalkingAnimation;
+  public Animation<TextureRegion> southWalkingAnimation;
+  public Animation<TextureRegion> westWalkingAnimation;
+  public Animation<TextureRegion> eastWalkingAnimation;
+
+  public Animation<TextureRegion> northStandingAnimation;
+  public Animation<TextureRegion> southStandingAnimation;
+  public Animation<TextureRegion> westStandingAnimation;
+  public Animation<TextureRegion> eastStandingAnimation;
+
   private TextureRegion[] playerRegions;
+
+  float animationTime;
 
   private TextureRegion playerRegion() {
 
-    switch(GameManager.instance().player().direction()) {
-      case NORTH -> { return playerRegions[8]; }
-      case EAST -> { return playerRegions[16]; }
-      case WEST -> { return playerRegions[24]; }
-      default -> { return playerRegions[0]; }
+    final Player player = GameManager.instance().player();
+    switch(player.direction()) {
+      case NORTH -> {
+        if(!player.moving()) {
+          return northStandingAnimation.getKeyFrame(animationTime, true);
+        }
+
+        return northWalkingAnimation.getKeyFrame(animationTime, true);
+      }
+      case EAST -> {
+        if(!player.moving()) {
+          return eastStandingAnimation.getKeyFrame(animationTime, true);
+        }
+        return eastWalkingAnimation.getKeyFrame(animationTime, true);
+      }
+      case WEST -> {
+        if(!player.moving()) {
+          return westStandingAnimation.getKeyFrame(animationTime, true);
+        }
+        return westWalkingAnimation.getKeyFrame(animationTime, true);
+      }
+      default -> {
+        if(!player.moving()) {
+          return southStandingAnimation.getKeyFrame(animationTime, true);
+        }
+        return southWalkingAnimation.getKeyFrame(animationTime, true);
+      }
     }
+  }
+
+  private TextureRegion[] animationFrames(final int start, final int length) {
+
+    final TextureRegion[] frames = new TextureRegion[length];
+    int index = start;
+
+    for(int i = 0; i < length; i++) {
+
+      frames[i] = playerRegions[index];
+
+      index++;
+    }
+
+    return frames;
   }
 
   /**
@@ -59,6 +111,21 @@ public class PlayerRenderer implements Renderable {
         playerRegions[index++] = playerSplit[i][j];
       }
     }
+
+    //animation arrays creation
+    //our walking animations
+    southWalkingAnimation = new Animation<>(0.05f, animationFrames(32, 8));
+    northWalkingAnimation = new Animation<>(0.05f, animationFrames(40,8));
+    westWalkingAnimation = new Animation<>(0.05f, animationFrames(56,8));
+    eastWalkingAnimation = new Animation<>(0.05f, animationFrames(48,8));
+
+    //standing animation
+    southStandingAnimation = new Animation<>(0.10f, animationFrames(0, 8));
+    northStandingAnimation = new Animation<>(0.10f, animationFrames(8,8));
+    westStandingAnimation = new Animation<>(0.10f, animationFrames(24,8));
+    eastStandingAnimation = new Animation<>(0.10f, animationFrames(16,8));
+
+    animationTime = 0f;
   }
 
   /**
@@ -68,6 +135,8 @@ public class PlayerRenderer implements Renderable {
    */
   @Override
   public void render(final SpriteBatch batch) {
+
+    animationTime += Gdx.graphics.getDeltaTime();
 
     batch.draw(playerRegion(), GameManager.instance().player().location().x(), GameManager.instance().player().location().y(), 40, 56);
   }
