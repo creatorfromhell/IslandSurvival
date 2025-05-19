@@ -3,7 +3,6 @@ package io.github.creatorfromhell.world.generator;
 import io.github.creatorfromhell.registry.TileTypeRegistry;
 import io.github.creatorfromhell.world.biome.Biome;
 import io.github.creatorfromhell.world.tile.Tile;
-import io.github.creatorfromhell.world.tile.TileType;
 
 /**
  * WorldGenerator

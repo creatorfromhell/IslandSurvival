@@ -17,7 +17,11 @@ package io.github.creatorfromhell.registry;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import io.github.creatorfromhell.GameManager;
 import io.github.creatorfromhell.world.tile.Tile;
+import io.github.creatorfromhell.world.tile.impl.SimpleTile;
+import io.github.creatorfromhell.world.tile.impl.SimpleTileRenderer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +33,8 @@ import java.util.Map;
  * @since 0.0.1.0
  */
 public class TileTypeRegistry {
+
+  public static final int TILE_SIZE = 16;
 
   private static final Map<String, Tile> REGISTRY = new HashMap<>();
 
@@ -59,5 +65,21 @@ public class TileTypeRegistry {
    */
   public static boolean exists(final String id) {
     return REGISTRY.containsKey(id);
+  }
+
+  public static void create() {
+
+    final TextureRegion[][] split = TextureRegion.split(GameManager.instance().assetManager().tilesheet(), TILE_SIZE, TILE_SIZE);
+
+    register(new SimpleTile("core:grass", false, new SimpleTileRenderer(split[0][2]), true));
+    register(new SimpleTile("core:forest_grass", false, new SimpleTileRenderer(split[0][3]), true));
+    register(new SimpleTile("core:sand", false, new SimpleTileRenderer(split[2][1]), false));
+    register(new SimpleTile("core:snow", false, new SimpleTileRenderer(split[0][1]), false));
+    register(new SimpleTile("core:ice", true, new SimpleTileRenderer(split[0][1]), false));
+    register(new SimpleTile("core:dirt", false, new SimpleTileRenderer(split[0][0]), false));
+    register(new SimpleTile("core:water", false, new SimpleTileRenderer(split[1][2]), false));
+    register(new SimpleTile("core:lava", true, new SimpleTileRenderer(split[3][0]), false));
+    register(new SimpleTile("core:stone", true, new SimpleTileRenderer(split[1][0]), false));
+    register(new SimpleTile("core:coast", true, new SimpleTileRenderer(split[3][3]), false));
   }
 }

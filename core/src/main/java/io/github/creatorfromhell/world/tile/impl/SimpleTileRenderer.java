@@ -24,7 +24,7 @@ import io.github.creatorfromhell.world.biome.Biome;
 import io.github.creatorfromhell.world.tile.Tile;
 import io.github.creatorfromhell.world.tile.TileRenderer;
 
-import static io.github.creatorfromhell.Main.TILE_SIZE;
+import static io.github.creatorfromhell.registry.TileTypeRegistry.TILE_SIZE;
 
 /**
  * SimpleTileRenderer

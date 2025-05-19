@@ -1,9 +1,6 @@
 package io.github.creatorfromhell.world.tile;
 
 
-import com.badlogic.gdx.graphics.Color;
-import io.github.creatorfromhell.world.biome.Biome;
-
 /**
  * Tile
  *

@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import io.github.creatorfromhell.entity.Player;
 
-import static io.github.creatorfromhell.Main.TILE_SIZE;
+import static io.github.creatorfromhell.registry.TileTypeRegistry.TILE_SIZE;
 
 /**
  * CameraController
