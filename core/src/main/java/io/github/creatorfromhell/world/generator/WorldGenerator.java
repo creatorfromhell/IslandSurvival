@@ -1,6 +1,7 @@
 package io.github.creatorfromhell.world.generator;
 
 import io.github.creatorfromhell.registry.TileTypeRegistry;
+import io.github.creatorfromhell.util.location.Location;
 import io.github.creatorfromhell.world.biome.Biome;
 import io.github.creatorfromhell.world.tile.Tile;
 
@@ -26,6 +27,11 @@ public class WorldGenerator {
     // Lower sea level = more land exposed
     this.seaLevel = -0.2f;
     this.mountainLevel = 0.8f;  // example threshold for mountains
+  }
+
+  public Tile getTileType(final Location location) {
+
+    return getTileType(location.x(), location.y());
   }
 
   /**
@@ -60,6 +66,11 @@ public class WorldGenerator {
     }
 
     return tile;
+  }
+
+  public Biome getBiome(final Location location) {
+
+    return biomeGen.getBiomeAt(location.x(), location.y());
   }
 
   public Biome getBiome(final int x, final int y) {

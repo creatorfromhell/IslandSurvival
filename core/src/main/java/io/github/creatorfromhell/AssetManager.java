@@ -23,7 +23,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import io.github.creatorfromhell.client.render.Renderable;
 import io.github.creatorfromhell.client.render.ui.BiomeBordersComponent;
+import io.github.creatorfromhell.client.render.ui.ControlsOverlayComponent;
 import io.github.creatorfromhell.client.render.ui.DebugComponent;
+import io.github.creatorfromhell.client.render.ui.TileSelectorComponent;
 import io.github.creatorfromhell.client.render.ui.WorldComponent;
 import io.github.creatorfromhell.entity.Entity;
 
@@ -43,12 +45,15 @@ public class AssetManager {
 
   //we use a linked hashmap since rendering is very order driven and we need to render in the correct order.
   public final LinkedHashMap<String, Renderable> uiComponents = new LinkedHashMap<>();
+  public final LinkedHashMap<String, Renderable> lateUIComponents = new LinkedHashMap<>();
 
   public AssetManager() {
 
     uiComponents.put("world", new WorldComponent());
     uiComponents.put("biome-borders", new BiomeBordersComponent());
     uiComponents.put("debug", new DebugComponent());
+    uiComponents.put("controls", new ControlsOverlayComponent());
+    lateUIComponents.put("selector", new TileSelectorComponent());
   }
 
   public void create() {

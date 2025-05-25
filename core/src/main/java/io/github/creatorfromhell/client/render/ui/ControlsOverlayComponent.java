@@ -24,77 +24,52 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import io.github.creatorfromhell.GameManager;
 import io.github.creatorfromhell.client.render.Renderable;
 import io.github.creatorfromhell.entity.Player;
-import io.github.creatorfromhell.util.location.Location;
-import io.github.creatorfromhell.world.biome.Biome;
-import io.github.creatorfromhell.world.tile.Tile;
-
-import static io.github.creatorfromhell.registry.TileTypeRegistry.TILE_SIZE;
 
 /**
- * DebugComponent
+ * ControlsOverlayComponent
+ * Displays control instructions when debug mode is off.
  *
  * @author creatorfromhell
- * @since 0.0.1.0
+ * @since 0.0.1.1
  */
-public class DebugComponent implements Renderable {
+public class ControlsOverlayComponent implements Renderable {
 
   private BitmapFont font;
 
-  /**
-   * Creates a new UI component. This method is used to initialize a new instance of the UI
-   * component.
-   */
   @Override
   public void create() {
-
     font = new BitmapFont();
   }
 
-  /**
-   * Renders the UI component using the provided SpriteBatch.
-   *
-   * @param batch the SpriteBatch used to render the UI component
-   */
   @Override
   public void render(final SpriteBatch batch) {
-
-    font.setColor(Color.WHITE);
-
     final Player player = GameManager.instance().player();
 
-    if(player.debug()) {
+    if(!player.debug()) {
+      font.setColor(Color.LIGHT_GRAY);
 
-      font.setColor(Color.WHITE);
-
-      final float lineHeight = 20f;
       final float startX = player.cameraController().camera().position.x - Gdx.graphics.getWidth() / 2f * player.cameraController().camera().zoom + 10;
       final float startY = player.cameraController().camera().position.y + Gdx.graphics.getHeight() / 2f * player.cameraController().camera().zoom - 10;
 
+      final float lineHeight = 20f;
       float y = startY;
 
-      final Location playerTile = player.location().asTile();
-      final Tile currentTile = GameManager.instance().worldGenerator().getTileType(playerTile);
-      final Biome currentBiome = GameManager.instance().worldGenerator().getBiome(playerTile);
-
-      font.draw(batch, "Coords: " + playerTile, startX, y);
+      font.draw(batch, "Controls:", startX, y);
       y -= lineHeight;
-      font.draw(batch, "Tile: " + currentTile.id(), startX, y);
+      font.draw(batch, "Movement: W A S D", startX, y);
       y -= lineHeight;
-      font.draw(batch, "Biome: " + currentBiome.id(), startX, y);
+      font.draw(batch, "Zoom In: DOWN Arrow", startX, y);
       y -= lineHeight;
-      font.draw(batch, "Speed: " + player.speed(), startX, y);
+      font.draw(batch, "Zoom Out: UP Arrow", startX, y);
       y -= lineHeight;
-      font.draw(batch, "Direction: " + player.direction().name(), startX, y);
+      font.draw(batch, "Toggle Debug: TAB", startX, y);
       y -= lineHeight;
-      font.draw(batch, "Moving: " + player.moving(), startX, y);
+      font.draw(batch, "Increase Speed: RIGHT Arrow", startX, y);
       y -= lineHeight;
-      font.draw(batch, "Mouse Coords: " + Location.fromMouse(), startX, y);
+      font.draw(batch, "Decrease Speed: LEFT Arrow", startX, y);
     }
   }
 
-  /**
-   * Releases any resources held by the UI component.
-   */
   @Override
   public void dispose() {
     font.dispose();

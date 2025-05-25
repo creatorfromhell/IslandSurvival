@@ -64,5 +64,7 @@ public class InputHandler {
     if(Gdx.input.isKeyPressed(Input.Keys.UP)) player.cameraController().zoomIn(1f * dt);
     if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) player.cameraController().zoomOut(1f * dt);
     if(Gdx.input.isKeyJustPressed(Input.Keys.R)) player.cameraController().zoom(1f);
+
+    //player.cameraController().camera().update();
   }
 }
