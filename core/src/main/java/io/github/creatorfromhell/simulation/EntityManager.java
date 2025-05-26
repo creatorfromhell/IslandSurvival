@@ -1,4 +1,4 @@
-package io.github.creatorfromhell;
+package io.github.creatorfromhell.simulation;
 /*
  * IslandSurvival
  * Copyright (C) 2025 Daniel "creatorfromhell" Vidmar
@@ -46,6 +46,18 @@ public class EntityManager {
   public Map<UUID, Entity> entities() {
 
     return entities;
+  }
+
+  /**
+   * Call update on all managed entities.
+   *
+   * @param delta time since last frame
+   */
+  public void updateAll(final float delta) {
+    for(final Entity entity : entities.values()) {
+
+      entity.update(delta);
+    }
   }
 
   public Player player() {

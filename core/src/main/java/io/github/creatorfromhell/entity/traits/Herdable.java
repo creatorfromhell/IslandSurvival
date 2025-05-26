@@ -17,45 +17,43 @@ package io.github.creatorfromhell.entity.traits;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import io.github.creatorfromhell.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
+
 /**
- * Predator represents an {@link LivingEntity} that is classified as a "predator" for at least one
- * {@link Prey} entity.
+ * Interface representing an animal that can be herded.
+ * Implementing classes should provide functionality to join a herd led by another Herdable instance,
+ * and to check if the animal is currently part of a herd.
  *
  * @author creatorfromhell
  * @since 0.0.1.0
  */
-public interface Predator {
+public interface Herdable {
 
   /**
-   * Adds a prey to the predator with a specified priority.
+   * Join a herd under the specified leader.
    *
-   * @param prey The LivingEntity to be added as prey.
-   * @param priority The priority of the prey being added.
+   * @param leader the herd leader
    */
-  void addPrey(@NotNull LivingEntity prey, int priority);
+  void joinHerd(@NotNull Herdable leader);
 
   /**
-   * Removes a prey entity from this predator's list of prey.
-   *
-   * @param prey The LivingEntity to be removed as prey.
+   * Leave the current herd.
    */
-  void removePrey(@NotNull LivingEntity prey);
+  void leaveHerd();
 
   /**
-   * Determines if this predator can hunt the specified target.
+   * Check if the entity is currently part of a herd.
    *
-   * @param target The potential prey.
-   * @return true if the target is a valid prey and within hunting logic.
+   * @return true if the entity is in a herd, false otherwise
    */
-  boolean canHunt(@NotNull LivingEntity target);
+  boolean isInHerd();
 
   /**
-   * Initiates a hunt toward the given prey.
+   * Get the leader of the herd this entity belongs to.
    *
-   * @param target The prey entity to hunt.
+   * @return the herd leader or empty optional if not in a herd
    */
-  void hunt(@NotNull LivingEntity target);
+  Optional<Herdable> getHerdLeader();
 }

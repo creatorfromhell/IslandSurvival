@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
  * @author creatorfromhell
  * @since 0.0.1.0
  */
-public class LivingEntity extends Entity implements Moveable {
+public abstract class LivingEntity extends Entity implements Moveable {
 
   protected Location location = Location.ZERO;
   protected Direction direction = Direction.SOUTH;

@@ -74,4 +74,10 @@ public abstract class Entity {
     this.renderable = renderable;
   }
 
+  /**
+   * Update method called every game tick.
+   *
+   * @param delta time elapsed since last update (in seconds)
+   */
+  public abstract void update(float delta);
 }

@@ -17,23 +17,20 @@ package io.github.creatorfromhell.entity.traits;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import io.github.creatorfromhell.entity.LivingEntity;
-import io.github.creatorfromhell.util.location.Location;
-import org.jetbrains.annotations.NotNull;
+import java.util.Set;
 
 /**
- * Prey represents an {@link LivingEntity} that is classified as "prey" for at least one
- * {@link Predator} entity.
+ * HerdLeader Represents a leader of a herd and tracks its members.
  *
  * @author creatorfromhell
  * @since 0.0.1.0
  */
-public interface Prey {
+public interface HerdLeader {
 
   /**
-   * Triggers a flee response from the specified threat.
+   * Get the set of herd members following this leader.
    *
-   * @param threatLocation The location of the threat.
+   * @return a modifiable set of herd members
    */
-  void fleeFrom(@NotNull Location threatLocation);
+  Set<Herdable> getHerdMembers();
 }

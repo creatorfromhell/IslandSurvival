@@ -69,7 +69,7 @@ public class AssetManager {
       uiComponent.create();
     }
 
-    for(final Entity entity : GameManager.instance().entityManager().entities.values()) {
+    for(final Entity entity : GameManager.instance().entityManager().entities().values()) {
 
       if(entity.renderer().isPresent()) {
         entity.renderer().get().create();
@@ -91,7 +91,7 @@ public class AssetManager {
       batch.setColor(Color.WHITE);
     }
 
-    for(final Entity entity : GameManager.instance().entityManager().entities.values()) {
+    for(final Entity entity : GameManager.instance().entityManager().entities().values()) {
 
       if(entity.renderer().isPresent()) {
         entity.renderer().get().render(batch);
@@ -111,7 +111,7 @@ public class AssetManager {
       uiComponent.dispose();
     }
 
-    for(final Entity entity : GameManager.instance().entityManager().entities.values()) {
+    for(final Entity entity : GameManager.instance().entityManager().entities().values()) {
 
       if(entity.renderer().isPresent()) {
         entity.renderer().get().dispose();

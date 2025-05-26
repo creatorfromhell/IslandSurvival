@@ -1,6 +1,7 @@
 package io.github.creatorfromhell;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
 
 public class Main extends ApplicationAdapter {
 
@@ -17,7 +18,8 @@ public class Main extends ApplicationAdapter {
   @Override
   public void render() {
 
-    manager.render();
+    final float delta = Gdx.graphics.getDeltaTime();
+    manager.render(delta);
   }
 
   @Override

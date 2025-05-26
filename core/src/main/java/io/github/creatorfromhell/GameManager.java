@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.ScreenUtils;
 import io.github.creatorfromhell.entity.Player;
 import io.github.creatorfromhell.registry.TileTypeRegistry;
+import io.github.creatorfromhell.simulation.EntityManager;
 import io.github.creatorfromhell.world.generator.WorldGenerator;
 
 /**
@@ -64,15 +65,17 @@ public class GameManager {
     TileTypeRegistry.create();
   }
 
-  public void render() {
+  public void render(final float delta) {
 
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+    ScreenUtils.clear(0, 0, 0, 1);
+
+    entityManager.updateAll(delta);
 
     entityManager.player().handler().render();
 
     entityManager.player().cameraController().render();
-
-    ScreenUtils.clear(0, 0, 0, 1);
 
     assetManager.render();
   }
