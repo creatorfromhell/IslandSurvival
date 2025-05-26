@@ -30,27 +30,27 @@ public class InputHandler {
     if(Gdx.input.isKeyPressed(Input.Keys.W)) {
       player.location().addY((int)(player.speed() * dt));
 
-      player.direction(Direction.NORTH);
+      player.face(Direction.NORTH);
       isMoving = true;
     }
 
     if(Gdx.input.isKeyPressed(Input.Keys.S)) {
       player.location().subY((int)(player.speed() * dt));
-      player.direction(Direction.SOUTH);
+      player.face(Direction.SOUTH);
       isMoving = true;
     }
     if(Gdx.input.isKeyPressed(Input.Keys.A)) {
       player.location().subX((int)(player.speed() * dt));
-      player.direction(Direction.WEST);
+      player.face(Direction.WEST);
       isMoving = true;
     }
     if(Gdx.input.isKeyPressed(Input.Keys.D)) {
       player.location().addX((int)(player.speed() * dt));
-      player.direction(Direction.EAST);
+      player.face(Direction.EAST);
       isMoving = true;
     }
 
-    player.moving(isMoving);
+    player.setMoving(isMoving);
 
     if(Gdx.input.isKeyJustPressed(Input.Keys.TAB)) player.debug(!player.debug());
 

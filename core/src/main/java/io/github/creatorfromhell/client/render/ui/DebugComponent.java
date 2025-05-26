@@ -86,7 +86,7 @@ public class DebugComponent implements Renderable {
       y -= lineHeight;
       font.draw(batch, "Direction: " + player.direction().name(), startX, y);
       y -= lineHeight;
-      font.draw(batch, "Moving: " + player.moving(), startX, y);
+      font.draw(batch, "Moving: " + player.isMoving(), startX, y);
       y -= lineHeight;
       font.draw(batch, "Mouse Coords: " + Location.fromMouse(), startX, y);
     }

@@ -57,26 +57,26 @@ public class PlayerRenderer implements Renderable {
     final Player player = GameManager.instance().player();
     switch(player.direction()) {
       case NORTH -> {
-        if(!player.moving()) {
+        if(!player.isMoving()) {
           return northStandingAnimation.getKeyFrame(animationTime, true);
         }
 
         return northWalkingAnimation.getKeyFrame(animationTime, true);
       }
       case EAST -> {
-        if(!player.moving()) {
+        if(!player.isMoving()) {
           return eastStandingAnimation.getKeyFrame(animationTime, true);
         }
         return eastWalkingAnimation.getKeyFrame(animationTime, true);
       }
       case WEST -> {
-        if(!player.moving()) {
+        if(!player.isMoving()) {
           return westStandingAnimation.getKeyFrame(animationTime, true);
         }
         return westWalkingAnimation.getKeyFrame(animationTime, true);
       }
       default -> {
-        if(!player.moving()) {
+        if(!player.isMoving()) {
           return southStandingAnimation.getKeyFrame(animationTime, true);
         }
         return southWalkingAnimation.getKeyFrame(animationTime, true);

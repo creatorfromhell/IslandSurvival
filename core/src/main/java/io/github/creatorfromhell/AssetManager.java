@@ -27,7 +27,7 @@ import io.github.creatorfromhell.client.render.ui.ControlsOverlayComponent;
 import io.github.creatorfromhell.client.render.ui.DebugComponent;
 import io.github.creatorfromhell.client.render.ui.TileSelectorComponent;
 import io.github.creatorfromhell.client.render.ui.WorldComponent;
-import io.github.creatorfromhell.entity.EntityOld;
+import io.github.creatorfromhell.entity.Entity;
 
 import java.util.LinkedHashMap;
 
@@ -69,7 +69,7 @@ public class AssetManager {
       uiComponent.create();
     }
 
-    for(final EntityOld entity : GameManager.instance().entityManager().entities.values()) {
+    for(final Entity entity : GameManager.instance().entityManager().entities.values()) {
 
       if(entity.renderer().isPresent()) {
         entity.renderer().get().create();
@@ -91,7 +91,7 @@ public class AssetManager {
       batch.setColor(Color.WHITE);
     }
 
-    for(final EntityOld entity : GameManager.instance().entityManager().entities.values()) {
+    for(final Entity entity : GameManager.instance().entityManager().entities.values()) {
 
       if(entity.renderer().isPresent()) {
         entity.renderer().get().render(batch);
@@ -111,7 +111,7 @@ public class AssetManager {
       uiComponent.dispose();
     }
 
-    for(final EntityOld entity : GameManager.instance().entityManager().entities.values()) {
+    for(final Entity entity : GameManager.instance().entityManager().entities.values()) {
 
       if(entity.renderer().isPresent()) {
         entity.renderer().get().dispose();

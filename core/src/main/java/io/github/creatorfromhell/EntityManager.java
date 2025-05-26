@@ -17,7 +17,7 @@ package io.github.creatorfromhell;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import io.github.creatorfromhell.entity.EntityOld;
+import io.github.creatorfromhell.entity.Entity;
 import io.github.creatorfromhell.entity.Player;
 
 import java.util.HashMap;
@@ -32,7 +32,7 @@ import java.util.UUID;
  */
 public class EntityManager {
 
-  protected final Map<UUID, EntityOld> entities = new HashMap<>();
+  protected final Map<UUID, Entity> entities = new HashMap<>();
 
   private final Player player;
 
@@ -43,7 +43,7 @@ public class EntityManager {
     entities.put(UUID.randomUUID(), player);
   }
 
-  public Map<UUID, EntityOld> entities() {
+  public Map<UUID, Entity> entities() {
 
     return entities;
   }
