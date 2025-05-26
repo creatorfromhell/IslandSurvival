@@ -1,4 +1,4 @@
-package io.github.creatorfromhell;
+package io.github.creatorfromhell.entity.behaviour;
 /*
  * IslandSurvival
  * Copyright (C) 2025 Daniel "creatorfromhell" Vidmar
@@ -17,39 +17,21 @@ package io.github.creatorfromhell;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import io.github.creatorfromhell.entity.EntityOld;
-import io.github.creatorfromhell.entity.Player;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import io.github.creatorfromhell.entity.LivingEntity;
 
 /**
- * EntityManager
+ * Behaviour represents a behaviour action that an {@link LivingEntity} can do.
  *
  * @author creatorfromhell
  * @since 0.0.1.0
  */
-public class EntityManager {
+public interface Behaviour {
 
-  protected final Map<UUID, EntityOld> entities = new HashMap<>();
-
-  private final Player player;
-
-  public EntityManager() {
-
-    this.player = new Player();
-
-    entities.put(UUID.randomUUID(), player);
-  }
-
-  public Map<UUID, EntityOld> entities() {
-
-    return entities;
-  }
-
-  public Player player() {
-
-    return player;
-  }
+  /**
+   * Updates the given entity based on the specified time delta.
+   *
+   * @param entity the LivingEntity to be updated
+   * @param delta the time elapsed since the last update
+   */
+  void update(LivingEntity entity, float delta);
 }

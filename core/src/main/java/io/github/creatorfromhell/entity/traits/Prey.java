@@ -1,4 +1,4 @@
-package io.github.creatorfromhell;
+package io.github.creatorfromhell.entity.traits;
 /*
  * IslandSurvival
  * Copyright (C) 2025 Daniel "creatorfromhell" Vidmar
@@ -17,39 +17,16 @@ package io.github.creatorfromhell;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import io.github.creatorfromhell.entity.EntityOld;
-import io.github.creatorfromhell.entity.Player;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import io.github.creatorfromhell.entity.LivingEntity;
 
 /**
- * EntityManager
+ * Prey represents an {@link LivingEntity} that is classified as "prey" for at least one
+ * {@link Predator} entity.
  *
  * @author creatorfromhell
  * @since 0.0.1.0
  */
-public class EntityManager {
+public interface Prey {
 
-  protected final Map<UUID, EntityOld> entities = new HashMap<>();
 
-  private final Player player;
-
-  public EntityManager() {
-
-    this.player = new Player();
-
-    entities.put(UUID.randomUUID(), player);
-  }
-
-  public Map<UUID, EntityOld> entities() {
-
-    return entities;
-  }
-
-  public Player player() {
-
-    return player;
-  }
 }

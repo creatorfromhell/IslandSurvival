@@ -1,4 +1,4 @@
-package io.github.creatorfromhell;
+package io.github.creatorfromhell.entity.traits;
 /*
  * IslandSurvival
  * Copyright (C) 2025 Daniel "creatorfromhell" Vidmar
@@ -17,39 +17,30 @@ package io.github.creatorfromhell;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import io.github.creatorfromhell.entity.EntityOld;
-import io.github.creatorfromhell.entity.Player;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import io.github.creatorfromhell.entity.LivingEntity;
 
 /**
- * EntityManager
+ * Predator represents an {@link LivingEntity} that is classified as a "predator" for at least one
+ * {@link Prey} entity.
  *
  * @author creatorfromhell
  * @since 0.0.1.0
  */
-public class EntityManager {
+public interface Predator {
 
-  protected final Map<UUID, EntityOld> entities = new HashMap<>();
 
-  private final Player player;
+  /**
+   * Adds a prey to the predator with a specified priority.
+   *
+   * @param prey The LivingEntity to be added as prey.
+   * @param priority The priority of the prey being added.
+   */
+  void addPrey(LivingEntity prey, int priority);
 
-  public EntityManager() {
-
-    this.player = new Player();
-
-    entities.put(UUID.randomUUID(), player);
-  }
-
-  public Map<UUID, EntityOld> entities() {
-
-    return entities;
-  }
-
-  public Player player() {
-
-    return player;
-  }
+  /**
+   * Removes a prey entity from this predator's list of prey.
+   *
+   * @param prey The LivingEntity to be removed as prey.
+   */
+  void removePrey(LivingEntity prey);
 }

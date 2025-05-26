@@ -1,4 +1,4 @@
-package io.github.creatorfromhell;
+package io.github.creatorfromhell.entity.traits;
 /*
  * IslandSurvival
  * Copyright (C) 2025 Daniel "creatorfromhell" Vidmar
@@ -17,39 +17,24 @@ package io.github.creatorfromhell;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import io.github.creatorfromhell.entity.EntityOld;
-import io.github.creatorfromhell.entity.Player;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import io.github.creatorfromhell.entity.Entity;
+import io.github.creatorfromhell.entity.LivingEntity;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * EntityManager
+ * Healable represents an {@link LivingEntity} that can be healed.
  *
  * @author creatorfromhell
  * @since 0.0.1.0
  */
-public class EntityManager {
+public interface Healable {
 
-  protected final Map<UUID, EntityOld> entities = new HashMap<>();
-
-  private final Player player;
-
-  public EntityManager() {
-
-    this.player = new Player();
-
-    entities.put(UUID.randomUUID(), player);
-  }
-
-  public Map<UUID, EntityOld> entities() {
-
-    return entities;
-  }
-
-  public Player player() {
-
-    return player;
-  }
+  /**
+   * Heals the entity for the specified amount of health.
+   *
+   * @param health the amount of health to heal the entity by
+   * @param healSource the entity that is the source of the healing (optional)
+   * @return true if the healing is successful, false otherwise
+   */
+  boolean heal(float health, @Nullable Entity healSource);
 }

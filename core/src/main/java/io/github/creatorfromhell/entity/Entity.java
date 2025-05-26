@@ -1,11 +1,27 @@
 package io.github.creatorfromhell.entity;
-
+/*
+ * IslandSurvival
+ * Copyright (C) 2025 Daniel "creatorfromhell" Vidmar
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 import io.github.creatorfromhell.client.render.Renderable;
-import io.github.creatorfromhell.util.location.Direction;
-import io.github.creatorfromhell.util.location.Location;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Entity
@@ -13,61 +29,49 @@ import java.util.Optional;
  * @author creatorfromhell
  * @since 0.0.1.0
  */
-public class Entity {
+public abstract class Entity {
 
-  protected Location location = Location.ZERO;
+  protected UUID id = UUID.randomUUID();
+  protected String type = "no-type";
+  protected Renderable renderable = null;
 
-  protected Direction direction = Direction.SOUTH;
-  protected Renderable renderer = null;
-  protected float speed = 150f;
+  /**
+   * This method returns a UUID that serves as the identifier for the implementing entity.
+   *
+   * @return a UUID representing the identifier of the entity
+   */
+  public UUID identifier() {
 
-  public Location location() {
-
-    return location;
+    return id;
   }
 
-  public void location(final Location location) {
-
-    this.location = location;
+  /**
+   * This method returns the type of the implementing entity.
+   *
+   * @return a String representing the type of the entity
+   */
+  public String type() {
+    return type;
   }
 
-  public Direction direction() {
-
-    return direction;
-  }
-
-  public void direction(final Direction direction) {
-
-    this.direction = direction;
-  }
-
+  /**
+   * This method generates a {@code Renderable} object that can be used to render the implementing entity on the screen.
+   *
+   * @return an {@code Optional} containing the {@code Renderable} object if it has been successfully created, or empty if an error occurred
+   */
   public Optional<Renderable> renderer() {
 
-    return Optional.ofNullable(renderer);
+    return Optional.ofNullable(renderable);
   }
 
-  public void renderer(final Renderable renderer) {
+  /**
+   * This method is responsible for rendering the specified {@code Renderable} object on the screen.
+   *
+   * @param renderable the object that will be rendered on the screen
+   */
+  public void renderer(final Renderable renderable) {
 
-    this.renderer = renderer;
+    this.renderable = renderable;
   }
 
-  public float speed() {
-
-    return speed;
-  }
-
-  public void speed(final float speed) {
-
-    this.speed = speed;
-  }
-
-  public void accelerate(final float speed) {
-
-    this.speed += speed;
-  }
-
-  public void decelerate(final float speed) {
-
-    this.speed -= speed;
-  }
 }

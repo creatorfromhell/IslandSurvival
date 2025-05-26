@@ -11,19 +11,17 @@ import io.github.creatorfromhell.client.render.entity.PlayerRenderer;
  * @author creatorfromhell
  * @since 0.0.1.0
  */
-public class Player extends Entity {
+public class Player extends LivingEntity {
 
   private InputHandler handler;
   private CameraController cameraController;
   private boolean debug = false;
 
-  private boolean moving = false;
-
   public Player() {
 
     this.handler = new InputHandler(this);
     this.cameraController = new CameraController(this);
-    this.renderer = new PlayerRenderer();
+    this.renderable = new PlayerRenderer();
   }
 
   public InputHandler handler() {
@@ -54,15 +52,5 @@ public class Player extends Entity {
   public void debug(final boolean debug) {
 
     this.debug = debug;
-  }
-
-  public boolean moving() {
-
-    return moving;
-  }
-
-  public void moving(final boolean moving) {
-
-    this.moving = moving;
   }
 }
