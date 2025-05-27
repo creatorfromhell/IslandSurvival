@@ -53,4 +53,14 @@ public class Player extends LivingEntity {
 
     this.debug = debug;
   }
+
+  /**
+   * Update method called every game tick.
+   *
+   * @param delta time elapsed since last update (in seconds)
+   */
+  @Override
+  public void update(final float delta) {
+
+  }
 }

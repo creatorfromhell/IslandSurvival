@@ -23,6 +23,8 @@ import io.github.creatorfromhell.entity.traits.Damageable;
 import io.github.creatorfromhell.entity.traits.Moveable;
 import io.github.creatorfromhell.entity.traits.Predator;
 import io.github.creatorfromhell.entity.traits.Prey;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Wolf
@@ -45,6 +47,27 @@ public class Wolf extends LivingEntity implements Predator, Moveable, Damageable
     if(behavior != null) {
       behavior.update(this, delta);
     }
+  }
+
+  /**
+   * Adds a prey to the predator with a specified priority.
+   *
+   * @param prey     The LivingEntity to be added as prey.
+   * @param priority The priority of the prey being added.
+   */
+  @Override
+  public void addPrey(@NotNull final LivingEntity prey, final int priority) {
+
+  }
+
+  /**
+   * Removes a prey entity from this predator's list of prey.
+   *
+   * @param prey The LivingEntity to be removed as prey.
+   */
+  @Override
+  public void removePrey(@NotNull final LivingEntity prey) {
+
   }
 
   @Override
@@ -72,5 +95,38 @@ public class Wolf extends LivingEntity implements Predator, Moveable, Damageable
 
   public void setBehavior(final Behaviour behavior) {
     this.behavior = behavior;
+  }
+
+  /**
+   * Checks if the entity is alive.
+   *
+   * @return true if the entity is alive, false otherwise
+   */
+  @Override
+  public boolean isAlive() {
+
+    return false;
+  }
+
+  /**
+   * Inflicts damage on the entity with the specified amount and source of damage.
+   *
+   * @param damage       The amount of damage to inflict on the entity as a float.
+   * @param damageSource The entity responsible for the damage, can be null if not applicable.
+   */
+  @Override
+  public void damage(final float damage, @Nullable final LivingEntity damageSource) {
+
+  }
+
+  /**
+   * Kills the living entity, marking it as dead in the game world.
+   *
+   * @param killer The entity that caused the death of the living entity, can be null if death was
+   *               not caused by another entity.
+   */
+  @Override
+  public void kill(@Nullable final LivingEntity killer) {
+
   }
 }
