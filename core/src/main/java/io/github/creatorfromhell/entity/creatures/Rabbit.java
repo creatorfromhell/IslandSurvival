@@ -17,9 +17,12 @@ package io.github.creatorfromhell.entity.creatures;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import io.github.creatorfromhell.GameManager;
+import io.github.creatorfromhell.client.render.entity.RabbitRenderer;
 import io.github.creatorfromhell.entity.LivingEntity;
 import io.github.creatorfromhell.entity.behaviour.Behaviour;
 import io.github.creatorfromhell.entity.behaviour.impl.FleeBehaviour;
+import io.github.creatorfromhell.entity.behaviour.impl.WanderBehaviour;
 import io.github.creatorfromhell.entity.traits.HerdLeader;
 import io.github.creatorfromhell.entity.traits.Herdable;
 import io.github.creatorfromhell.entity.traits.Moveable;
@@ -30,7 +33,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.Random;
 import java.util.Set;
+
+import static io.github.creatorfromhell.registry.TileTypeRegistry.TILE_SIZE;
 
 /**
  * Rabbit
@@ -43,7 +49,29 @@ public class Rabbit extends LivingEntity implements Prey, Moveable, Herdable, He
   private Herdable herdLeader;
   private final Set<Herdable> herdMembers = new HashSet<>();
   private Behaviour behavior;
-  private float speed = 30f;
+  private float speed = 50f;
+
+  private float wanderTime = 0f;
+  private float pauseTime = 0f;
+  private float pauseDuration = 1.5f;
+  private float wanderDuration = 2.5f;
+  private boolean isPaused = true;
+
+  private float internalX = 10;
+  private float internalY = 10;
+  private float dirX = 0;
+  private float dirY = 0;
+
+  private final Random random = new Random();
+
+  public Rabbit() {
+
+    this.renderable = new RabbitRenderer(id);
+
+    this.location = new Location(10, 10);
+
+    //this.behavior = new WanderBehaviour();
+  }
 
   @Override
   public void update(final float delta) {
@@ -51,6 +79,68 @@ public class Rabbit extends LivingEntity implements Prey, Moveable, Herdable, He
 
       behavior.update(this, delta);
     }
+
+    if(shouldFlee()) {
+
+      final Location playerLoc = GameManager.instance().player().location();
+      float dx = internalX - playerLoc.x();
+      float dy = internalY - playerLoc.y();
+      final float len = (float) Math.sqrt(dx * dx + dy * dy);
+      if(len > 0) {
+
+        dx /= len;
+        dy /= len;
+      }
+      internalX += dx * (speed + 70f) * delta;
+      internalY += dy * (speed + 70f) * delta;
+
+      move(new Location((int)internalX, (int)internalY));
+      return;
+    }
+
+    if(isPaused) {
+      pauseTime += delta;
+      if(pauseTime >= pauseDuration) {
+        isPaused = false;
+        wanderTime = 0;
+        // new random direction
+        dirX = random.nextFloat() * 2f - 1f;
+        dirY = random.nextFloat() * 2f - 1f;
+        final float len = (float) Math.sqrt(dirX * dirX + dirY * dirY);
+        if(len > 0) {
+
+          dirX /= len;
+          dirY /= len;
+        }
+      }
+    } else {
+      wanderTime += delta;
+      if (wanderTime >= wanderDuration) {
+        isPaused = true;
+        pauseTime = 0;
+      } else {
+        internalX += dirX * speed * delta;
+        internalY += dirY * speed * delta;
+
+        move(new Location((int)internalX, (int)internalY));
+      }
+    }
+  }
+
+  private boolean shouldFlee() {
+
+    // Convert rabbit's internal float position to tile coordinates
+    final int rabbitTileX = (int) (internalX / TILE_SIZE);
+    final int rabbitTileY = (int) (internalY / TILE_SIZE);
+
+    // Convert player location to tile coordinates using built-in asTile()
+    final Location playerTile = GameManager.instance().player().location().asTile();
+
+    final int dx = playerTile.x() - rabbitTileX;
+    final int dy = playerTile.y() - rabbitTileY;
+    final float distance = (float) Math.sqrt(dx * dx + dy * dy);
+
+    return distance <= 10;
   }
 
   @Override

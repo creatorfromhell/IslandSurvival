@@ -19,6 +19,7 @@ package io.github.creatorfromhell.simulation;
 
 import io.github.creatorfromhell.entity.Entity;
 import io.github.creatorfromhell.entity.Player;
+import io.github.creatorfromhell.entity.creatures.Rabbit;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +41,10 @@ public class EntityManager {
 
     this.player = new Player();
 
-    entities.put(UUID.randomUUID(), player);
+    entities.put(player.identifier(), player);
+
+    final Rabbit rabbit = new Rabbit();
+    entities.put(rabbit.identifier(), rabbit);
   }
 
   public Map<UUID, Entity> entities() {
