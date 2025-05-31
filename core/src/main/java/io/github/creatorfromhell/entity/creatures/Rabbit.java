@@ -44,7 +44,7 @@ import static io.github.creatorfromhell.registry.TileTypeRegistry.TILE_SIZE;
  * @author creatorfromhell
  * @since 0.0.1.0
  */
-public class Rabbit extends LivingEntity implements Prey, Moveable, Herdable, HerdLeader {
+public class Rabbit extends LivingEntity implements Prey, Herdable, HerdLeader {
 
   private Herdable herdLeader;
   private final Set<Herdable> herdMembers = new HashSet<>();
@@ -91,18 +91,27 @@ public class Rabbit extends LivingEntity implements Prey, Moveable, Herdable, He
         dx /= len;
         dy /= len;
       }
+
+      //apply the movement speed, and make it faster since the entity is fleeing.
       internalX += dx * (speed + 70f) * delta;
       internalY += dy * (speed + 70f) * delta;
 
-      move(new Location((int)internalX, (int)internalY));
+      //update the location and direction for the move
+      final Location newLoc = new Location((int) internalX, (int) internalY);
+      updateDirectionFromMove(location(), newLoc);
+      move(newLoc);
+
+      this.moving = true;
       return;
     }
 
     if(isPaused) {
+
       pauseTime += delta;
       if(pauseTime >= pauseDuration) {
         isPaused = false;
         wanderTime = 0;
+
         // new random direction
         dirX = random.nextFloat() * 2f - 1f;
         dirY = random.nextFloat() * 2f - 1f;
@@ -112,6 +121,7 @@ public class Rabbit extends LivingEntity implements Prey, Moveable, Herdable, He
           dirX /= len;
           dirY /= len;
         }
+        this.moving = false;
       }
     } else {
       wanderTime += delta;
@@ -122,7 +132,10 @@ public class Rabbit extends LivingEntity implements Prey, Moveable, Herdable, He
         internalX += dirX * speed * delta;
         internalY += dirY * speed * delta;
 
-        move(new Location((int)internalX, (int)internalY));
+        final Location newLoc = new Location((int) internalX, (int) internalY);
+        updateDirectionFromMove(location(), newLoc);
+        move(newLoc);
+        this.moving = true;
       }
     }
   }

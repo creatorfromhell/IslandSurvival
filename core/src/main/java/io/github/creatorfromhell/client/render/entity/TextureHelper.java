@@ -18,6 +18,7 @@ package io.github.creatorfromhell.client.render.entity;
  */
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -114,10 +115,10 @@ public class TextureHelper {
    * This method is used to create a new instance of an object. It should be implemented in classes
    * that require initialization.
    */
-  public void create(final int tileWidth, final int tileHeight, final int sheetHeight, final int sheetWidth) {
+  public void create(final Texture sheet, final int tileWidth, final int tileHeight, final int sheetHeight, final int sheetWidth) {
 
     //create a texture region split
-    final TextureRegion[][] split = TextureRegion.split(GameManager.instance().assetManager().playerSheet(), tileWidth, tileHeight);
+    final TextureRegion[][] split = TextureRegion.split(sheet, tileWidth, tileHeight);
     regions = new TextureRegion[sheetWidth * sheetHeight];
     int index = 0;
     //initialize our texture regions from our texture split.

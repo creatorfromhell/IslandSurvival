@@ -49,4 +49,23 @@ public interface Locatable {
    * @return The Location object representing the current coordinates (x, y).
    */
   Location location();
+
+  /**
+   * Updates the direction of the entity based on the move from one location to another.
+   *
+   * @param from The starting Location object.
+   * @param to The target Location object to move to.
+   */
+  default void updateDirectionFromMove(final Location from, final Location to) {
+    final int dx = to.x() - from.x();
+    final int dy = to.y() - from.y();
+
+    if (dx == 0 && dy == 0) return; // no movement
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+      face((dx > 0)? Direction.WEST : Direction.EAST);
+    } else {
+      face((dy > 0)? Direction.NORTH : Direction.SOUTH);
+    }
+  }
 }

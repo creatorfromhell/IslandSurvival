@@ -42,7 +42,7 @@ public class PlayerRenderer implements Renderable {
   @Override
   public void create() {
 
-    helper.create(48, 48, 24, 8);
+    helper.create(GameManager.instance().assetManager().playerSheet(), 48, 48, 24, 8);
 
     //animation arrays creation
     //our walking animations

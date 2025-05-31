@@ -17,8 +17,12 @@ package io.github.creatorfromhell.client.render.entity;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Matrix4;
 import io.github.creatorfromhell.GameManager;
 import io.github.creatorfromhell.client.render.Renderable;
 import io.github.creatorfromhell.entity.Entity;
@@ -36,7 +40,8 @@ import java.util.UUID;
 public class RabbitRenderer implements Renderable {
 
   private final UUID rabbitID;
-  private ShapeRenderer shapeRenderer;
+
+  private final TextureHelper helper = new TextureHelper();
 
   public RabbitRenderer(final UUID rabbitID) {
     this.rabbitID = rabbitID;
@@ -49,7 +54,22 @@ public class RabbitRenderer implements Renderable {
   @Override
   public void create() {
 
-    this.shapeRenderer = new ShapeRenderer();
+    //call our helper's create method with the correct sheet
+    helper.create(GameManager.instance().assetManager().rabbitSheet(), 16, 16, 5, 4);
+
+    //animation arrays creation
+    //our walking animations
+    helper.southWalkingAnimation(new Animation<>(0.10f, helper.animationFrames(0, 4)));
+    helper.northWalkingAnimation(new Animation<>(0.10f, helper.animationFrames(4,4)));
+    helper.westWalkingAnimation(new Animation<>(0.10f, helper.animationFrames(8,4)));
+    helper.eastWalkingAnimation(new Animation<>(0.10f, helper.animationFrames(12,4)));
+
+    //standing animation
+    final Animation<TextureRegion> standing = new Animation<>(0.10f, helper.animationFrames(16, 4));
+    helper.southStandingAnimation(standing);
+    helper.northStandingAnimation(standing);
+    helper.westStandingAnimation(standing);
+    helper.eastStandingAnimation(standing);
   }
 
   /**
@@ -59,20 +79,17 @@ public class RabbitRenderer implements Renderable {
    */
   @Override
   public void render(final SpriteBatch batch) {
-    batch.end(); // End batch before using ShapeRenderer
 
     final Entity entity = GameManager.instance().entityManager().entities().get(rabbitID);
     if(entity instanceof final Rabbit rabbit) {
 
-      final Location loc = rabbit.location();
-      shapeRenderer.setProjectionMatrix(GameManager.instance().player().cameraController().camera().combined);
-      shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-      shapeRenderer.setColor(0.75f, 0.75f, 0.75f, 1f); // Gray color
-      shapeRenderer.rect(loc.x(), loc.y(), 16, 16);
-      shapeRenderer.end();
-    }
+      final Matrix4 project = GameManager.instance().player().cameraController().camera().projection;
+      //batch.setProjectionMatrix(GameManager.instance().player().cameraController().camera().combined);
 
-    batch.begin(); // Resume batch
+      this.helper.render(batch, rabbit, 16, 16);
+
+      //batch.setProjectionMatrix(project);
+    }
   }
 
   /**
@@ -82,6 +99,6 @@ public class RabbitRenderer implements Renderable {
   @Override
   public void dispose() {
 
-    this.shapeRenderer.dispose();
+    this.helper.dispose();
   }
 }
