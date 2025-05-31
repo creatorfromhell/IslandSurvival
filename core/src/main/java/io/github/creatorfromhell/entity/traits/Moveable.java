@@ -18,7 +18,6 @@ package io.github.creatorfromhell.entity.traits;
  */
 
 import io.github.creatorfromhell.entity.LivingEntity;
-import io.github.creatorfromhell.util.location.Direction;
 import io.github.creatorfromhell.util.location.Location;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,27 +28,6 @@ import org.jetbrains.annotations.NotNull;
  * @since 0.0.1.0
  */
 public interface Moveable {
-
-  /**
-   * Retrieves the direction in which the Moveable entity is facing or moving.
-   *
-   * @return The direction the Moveable entity is facing/moving, represented by the Direction enum.
-   */
-  Direction direction();
-
-  /**
-   * Changes the direction that the Moveable entity is facing or moving.
-   *
-   * @param direction The new direction for the Moveable entity, represented by the Direction enum.
-   */
-  void face(@NotNull Direction direction);
-
-  /**
-   * Retrieves the location of the entity.
-   *
-   * @return The Location object representing the current coordinates (x, y).
-   */
-  Location location();
 
   /**
    * Moves the Moveable entity to the specified location.

@@ -21,6 +21,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import io.github.creatorfromhell.client.render.Renderable;
 import io.github.creatorfromhell.client.render.ui.BiomeBordersComponent;
 import io.github.creatorfromhell.client.render.ui.ControlsOverlayComponent;
@@ -41,7 +42,10 @@ public class AssetManager {
 
   private SpriteBatch batch;
   private Texture playerSheet;
+  private Texture rabbitSheet;
   private Texture tilesheet;
+
+  //TODO: Lighting system
 
   //we use a linked hashmap since rendering is very order driven and we need to render in the correct order.
   public final LinkedHashMap<String, Renderable> uiComponents = new LinkedHashMap<>();
@@ -58,9 +62,12 @@ public class AssetManager {
 
   public void create() {
 
+    //TODO: Lighting system
+
     batch = new SpriteBatch();
 
-    playerSheet = new Texture(Gdx.files.internal("character.png"));
+    playerSheet = new Texture(Gdx.files.internal("entity/character.png"));
+    rabbitSheet = new Texture(Gdx.files.internal("entity/animal/rabbit.png"));
 
     tilesheet = new Texture(Gdx.files.internal("tiles/tilesheet_v2.png"));
 
@@ -79,6 +86,7 @@ public class AssetManager {
 
   public void render() {
 
+    //TODO: Lighting system
 
     batch.setProjectionMatrix(GameManager.instance().player().cameraController().camera().combined);
     batch.begin();
@@ -101,6 +109,8 @@ public class AssetManager {
       }
     }
 
+    //TODO: Lighting system
+
     batch.end();
   }
 
@@ -120,7 +130,10 @@ public class AssetManager {
 
     batch.dispose();
     playerSheet.dispose();
+    rabbitSheet.dispose();
     tilesheet.dispose();
+
+    //TODO: Lighting system
   }
 
 
@@ -132,6 +145,11 @@ public class AssetManager {
   public Texture playerSheet() {
 
     return playerSheet;
+  }
+
+  public Texture rabbitSheet() {
+
+    return rabbitSheet;
   }
 
   public Texture tilesheet() {

@@ -29,9 +29,6 @@ import org.jetbrains.annotations.NotNull;
  * @since 0.0.1.0
  */
 public abstract class LivingEntity extends Entity implements Moveable {
-
-  protected Location location = Location.ZERO;
-  protected Direction direction = Direction.SOUTH;
   protected float speed = 150f;
   protected boolean moving = false;
 
@@ -76,39 +73,6 @@ public abstract class LivingEntity extends Entity implements Moveable {
   public void health(final float health) {
 
     this.health = health;
-  }
-
-  /**
-   * Retrieves the direction in which the Moveable entity is facing or moving.
-   *
-   * @return The direction the Moveable entity is facing/moving, represented by the Direction enum.
-   */
-  @Override
-  public Direction direction() {
-
-    return direction;
-  }
-
-  /**
-   * Changes the direction that the Moveable entity is facing or moving.
-   *
-   * @param direction The new direction for the Moveable entity, represented by the Direction enum.
-   */
-  @Override
-  public void face(@NotNull final Direction direction) {
-
-    this.direction = direction;
-  }
-
-  /**
-   * Retrieves the location of the entity.
-   *
-   * @return The Location object representing the current coordinates (x, y).
-   */
-  @Override
-  public Location location() {
-
-    return location;
   }
 
   /**

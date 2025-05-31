@@ -19,6 +19,7 @@ package io.github.creatorfromhell.simulation;
 
 import io.github.creatorfromhell.entity.traits.HerdLeader;
 import io.github.creatorfromhell.entity.traits.Herdable;
+import io.github.creatorfromhell.entity.traits.Locatable;
 import io.github.creatorfromhell.entity.traits.Moveable;
 import io.github.creatorfromhell.util.location.Location;
 
@@ -39,10 +40,11 @@ public class HerdManager {
    * @param deltaY movement in y direction
    */
   public void moveHerd(final Herdable leader, final float deltaX, final float deltaY) {
-    if(!(leader instanceof final HerdLeader herdLeader) || !(leader instanceof final Moveable moveable)) return;
+    if(!(leader instanceof final HerdLeader herdLeader) || !(leader instanceof final Moveable moveable)
+       || !(leader instanceof final Locatable locatable)) return;
 
     // Move leader
-    final Location current = moveable.location();
+    final Location current = locatable.location();
     moveable.move(new Location((int)(current.x() + deltaX), (int)(current.y() + deltaY)));
 
     // Move followers
@@ -51,7 +53,7 @@ public class HerdManager {
 
       if(member == leader || !(member instanceof final Moveable moveMember)) continue;
 
-      final Location loc = moveMember.location();
+      final Location loc = locatable.location();
       moveMember.move(new Location((int)(loc.x() + deltaX), (int)(loc.y() + deltaY)));
     }
   }

@@ -33,78 +33,7 @@ import io.github.creatorfromhell.entity.Player;
  */
 public class PlayerRenderer implements Renderable {
 
-  public Animation<TextureRegion> northWalkingAnimation;
-  public Animation<TextureRegion> southWalkingAnimation;
-  public Animation<TextureRegion> westWalkingAnimation;
-  public Animation<TextureRegion> eastWalkingAnimation;
-
-  public Animation<TextureRegion> northStandingAnimation;
-  public Animation<TextureRegion> southStandingAnimation;
-  public Animation<TextureRegion> westStandingAnimation;
-  public Animation<TextureRegion> eastStandingAnimation;
-
-  private TextureRegion[] playerRegions;
-
-  float animationTime;
-
-  /**
-   * Determines the appropriate TextureRegion to display for the player based on their direction and movement state.
-   *
-   * @return the TextureRegion to display for the player
-   */
-  private TextureRegion playerRegion() {
-
-    final Player player = GameManager.instance().player();
-    switch(player.direction()) {
-      case NORTH -> {
-        if(!player.isMoving()) {
-          return northStandingAnimation.getKeyFrame(animationTime, true);
-        }
-
-        return northWalkingAnimation.getKeyFrame(animationTime, true);
-      }
-      case EAST -> {
-        if(!player.isMoving()) {
-          return eastStandingAnimation.getKeyFrame(animationTime, true);
-        }
-        return eastWalkingAnimation.getKeyFrame(animationTime, true);
-      }
-      case WEST -> {
-        if(!player.isMoving()) {
-          return westStandingAnimation.getKeyFrame(animationTime, true);
-        }
-        return westWalkingAnimation.getKeyFrame(animationTime, true);
-      }
-      default -> {
-        if(!player.isMoving()) {
-          return southStandingAnimation.getKeyFrame(animationTime, true);
-        }
-        return southWalkingAnimation.getKeyFrame(animationTime, true);
-      }
-    }
-  }
-
-  /**
-   * Retrieves a sequence of TextureRegions from the playerRegions array based on the specified start index and length.
-   *
-   * @param start the starting index in the playerRegions array
-   * @param length the number of TextureRegions to retrieve
-   * @return an array of TextureRegions containing the specified sequence of frames
-   */
-  private TextureRegion[] animationFrames(final int start, final int length) {
-
-    final TextureRegion[] frames = new TextureRegion[length];
-    int index = start;
-
-    for(int i = 0; i < length; i++) {
-
-      frames[i] = playerRegions[index];
-
-      index++;
-    }
-
-    return frames;
-  }
+  private final TextureHelper helper = new TextureHelper();
 
   /**
    * This method is used to create a new instance of an object. It should be implemented in classes
@@ -113,31 +42,20 @@ public class PlayerRenderer implements Renderable {
   @Override
   public void create() {
 
-    final TextureRegion[][] playerSplit = TextureRegion.split(GameManager.instance().assetManager().playerSheet(), 48, 48);
-    playerRegions = new TextureRegion[8 * 24];
-    int index = 0;
-    for(int i = 0; i < 24; i++) {
-
-      for(int j = 0; j < 8; j++) {
-
-        playerRegions[index++] = playerSplit[i][j];
-      }
-    }
+    helper.create(48, 48, 24, 8);
 
     //animation arrays creation
     //our walking animations
-    southWalkingAnimation = new Animation<>(0.05f, animationFrames(32, 8));
-    northWalkingAnimation = new Animation<>(0.05f, animationFrames(40,8));
-    westWalkingAnimation = new Animation<>(0.05f, animationFrames(56,8));
-    eastWalkingAnimation = new Animation<>(0.05f, animationFrames(48,8));
+    helper.southWalkingAnimation(new Animation<>(0.05f, helper.animationFrames(32, 8)));
+    helper.northWalkingAnimation(new Animation<>(0.05f, helper.animationFrames(40,8)));
+    helper.westWalkingAnimation(new Animation<>(0.05f, helper.animationFrames(56,8)));
+    helper.eastWalkingAnimation(new Animation<>(0.05f, helper.animationFrames(48,8)));
 
     //standing animation
-    southStandingAnimation = new Animation<>(0.10f, animationFrames(0, 8));
-    northStandingAnimation = new Animation<>(0.10f, animationFrames(8,8));
-    westStandingAnimation = new Animation<>(0.10f, animationFrames(24,8));
-    eastStandingAnimation = new Animation<>(0.10f, animationFrames(16,8));
-
-    animationTime = 0f;
+    helper.southStandingAnimation(new Animation<>(0.10f, helper.animationFrames(0, 8)));
+    helper.northStandingAnimation(new Animation<>(0.10f, helper.animationFrames(8,8)));
+    helper.westStandingAnimation(new Animation<>(0.10f, helper.animationFrames(24,8)));
+    helper.eastStandingAnimation(new Animation<>(0.10f, helper.animationFrames(16,8)));
   }
 
   /**
@@ -148,9 +66,7 @@ public class PlayerRenderer implements Renderable {
   @Override
   public void render(final SpriteBatch batch) {
 
-    animationTime += Gdx.graphics.getDeltaTime();
-
-    batch.draw(playerRegion(), GameManager.instance().player().location().x(), GameManager.instance().player().location().y(), 40, 56);
+    helper.render(batch, GameManager.instance().player(), 40, 48);
   }
 
   /**
@@ -160,6 +76,6 @@ public class PlayerRenderer implements Renderable {
   @Override
   public void dispose() {
 
-    playerRegions = null;
+    helper.dispose();
   }
 }

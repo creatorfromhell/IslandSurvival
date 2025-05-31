@@ -18,6 +18,9 @@ package io.github.creatorfromhell.entity;
  */
 
 import io.github.creatorfromhell.client.render.Renderable;
+import io.github.creatorfromhell.entity.traits.Locatable;
+import io.github.creatorfromhell.util.location.Direction;
+import io.github.creatorfromhell.util.location.Location;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
@@ -29,11 +32,14 @@ import java.util.UUID;
  * @author creatorfromhell
  * @since 0.0.1.0
  */
-public abstract class Entity {
+public abstract class Entity implements Locatable {
 
   protected UUID id = UUID.randomUUID();
   protected String type = "no-type";
   protected Renderable renderable = null;
+
+  protected Location location = Location.ZERO;
+  protected Direction direction = Direction.SOUTH;
 
   /**
    * This method returns a UUID that serves as the identifier for the implementing entity.
@@ -72,6 +78,39 @@ public abstract class Entity {
   public void renderer(final Renderable renderable) {
 
     this.renderable = renderable;
+  }
+
+  /**
+   * Retrieves the direction in which the Moveable entity is facing or moving.
+   *
+   * @return The direction the Moveable entity is facing/moving, represented by the Direction enum.
+   */
+  @Override
+  public Direction direction() {
+
+    return direction;
+  }
+
+  /**
+   * Changes the direction that the Moveable entity is facing or moving.
+   *
+   * @param direction The new direction for the Moveable entity, represented by the Direction enum.
+   */
+  @Override
+  public void face(@NotNull final Direction direction) {
+
+    this.direction = direction;
+  }
+
+  /**
+   * Retrieves the location of the entity.
+   *
+   * @return The Location object representing the current coordinates (x, y).
+   */
+  @Override
+  public Location location() {
+
+    return location;
   }
 
   /**
