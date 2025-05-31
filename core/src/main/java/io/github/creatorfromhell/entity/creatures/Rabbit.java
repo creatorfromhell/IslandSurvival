@@ -22,15 +22,12 @@ import io.github.creatorfromhell.client.render.entity.RabbitRenderer;
 import io.github.creatorfromhell.entity.LivingEntity;
 import io.github.creatorfromhell.entity.behaviour.Behaviour;
 import io.github.creatorfromhell.entity.behaviour.impl.FleeBehaviour;
-import io.github.creatorfromhell.entity.behaviour.impl.WanderBehaviour;
 import io.github.creatorfromhell.entity.traits.HerdLeader;
 import io.github.creatorfromhell.entity.traits.Herdable;
-import io.github.creatorfromhell.entity.traits.Moveable;
 import io.github.creatorfromhell.entity.traits.Prey;
 import io.github.creatorfromhell.util.location.Location;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Random;

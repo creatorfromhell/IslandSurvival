@@ -17,17 +17,13 @@ package io.github.creatorfromhell.client.render.entity;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Matrix4;
 import io.github.creatorfromhell.GameManager;
 import io.github.creatorfromhell.client.render.Renderable;
 import io.github.creatorfromhell.entity.Entity;
 import io.github.creatorfromhell.entity.creatures.Rabbit;
-import io.github.creatorfromhell.util.location.Location;
 
 import java.util.UUID;
 
@@ -59,13 +55,13 @@ public class RabbitRenderer implements Renderable {
 
     //animation arrays creation
     //our walking animations
-    helper.southWalkingAnimation(new Animation<>(0.10f, helper.animationFrames(0, 4)));
-    helper.northWalkingAnimation(new Animation<>(0.10f, helper.animationFrames(4,4)));
-    helper.westWalkingAnimation(new Animation<>(0.10f, helper.animationFrames(8,4)));
-    helper.eastWalkingAnimation(new Animation<>(0.10f, helper.animationFrames(12,4)));
+    helper.southWalkingAnimation(new Animation<>(0.20f, helper.animationFrames(0, 4)));
+    helper.northWalkingAnimation(new Animation<>(0.20f, helper.animationFrames(4,4)));
+    helper.westWalkingAnimation(new Animation<>(0.20f, helper.animationFrames(8,4)));
+    helper.eastWalkingAnimation(new Animation<>(0.20f, helper.animationFrames(12,4)));
 
     //standing animation
-    final Animation<TextureRegion> standing = new Animation<>(0.10f, helper.animationFrames(16, 4));
+    final Animation<TextureRegion> standing = new Animation<>(0.20f, helper.animationFrames(16, 4));
     helper.southStandingAnimation(standing);
     helper.northStandingAnimation(standing);
     helper.westStandingAnimation(standing);
@@ -83,12 +79,7 @@ public class RabbitRenderer implements Renderable {
     final Entity entity = GameManager.instance().entityManager().entities().get(rabbitID);
     if(entity instanceof final Rabbit rabbit) {
 
-      final Matrix4 project = GameManager.instance().player().cameraController().camera().projection;
-      //batch.setProjectionMatrix(GameManager.instance().player().cameraController().camera().combined);
-
       this.helper.render(batch, rabbit, 16, 16);
-
-      //batch.setProjectionMatrix(project);
     }
   }
 

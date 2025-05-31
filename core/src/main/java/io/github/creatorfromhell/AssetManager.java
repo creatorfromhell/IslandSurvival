@@ -21,7 +21,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import io.github.creatorfromhell.client.render.Renderable;
 import io.github.creatorfromhell.client.render.ui.BiomeBordersComponent;
 import io.github.creatorfromhell.client.render.ui.ControlsOverlayComponent;

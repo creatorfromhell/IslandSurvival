@@ -28,8 +28,6 @@ import io.github.creatorfromhell.util.location.Location;
 import io.github.creatorfromhell.world.biome.Biome;
 import io.github.creatorfromhell.world.tile.Tile;
 
-import static io.github.creatorfromhell.registry.TileTypeRegistry.TILE_SIZE;
-
 /**
  * DebugComponent
  *

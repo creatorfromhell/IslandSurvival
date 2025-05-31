@@ -17,13 +17,10 @@ package io.github.creatorfromhell.client.render.entity;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import io.github.creatorfromhell.GameManager;
 import io.github.creatorfromhell.client.render.Renderable;
-import io.github.creatorfromhell.entity.Player;
 
 /**
  * PlayerRenderer

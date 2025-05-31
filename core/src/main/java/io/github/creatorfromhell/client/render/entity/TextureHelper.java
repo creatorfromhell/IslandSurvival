@@ -22,10 +22,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import io.github.creatorfromhell.GameManager;
 import io.github.creatorfromhell.entity.Entity;
 import io.github.creatorfromhell.entity.LivingEntity;
-import io.github.creatorfromhell.entity.Player;
 import io.github.creatorfromhell.util.location.Direction;
 
 /**

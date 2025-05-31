@@ -2,7 +2,6 @@ package io.github.creatorfromhell.util.location;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector3;
 import io.github.creatorfromhell.GameManager;
 

@@ -18,7 +18,6 @@ package io.github.creatorfromhell.entity;
  */
 
 import io.github.creatorfromhell.entity.traits.Moveable;
-import io.github.creatorfromhell.util.location.Direction;
 import io.github.creatorfromhell.util.location.Location;
 import org.jetbrains.annotations.NotNull;
 

@@ -17,10 +17,8 @@ package io.github.creatorfromhell.client.render.ui;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import io.github.creatorfromhell.GameManager;
