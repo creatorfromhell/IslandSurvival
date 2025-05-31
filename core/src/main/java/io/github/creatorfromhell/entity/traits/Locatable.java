@@ -60,10 +60,10 @@ public interface Locatable {
     final int dx = to.x() - from.x();
     final int dy = to.y() - from.y();
 
-    if (dx == 0 && dy == 0) return; // no movement
+    if(dx == 0 && dy == 0) return; // no movement
 
-    if (Math.abs(dx) > Math.abs(dy)) {
-      face((dx > 0)? Direction.WEST : Direction.EAST);
+    if(Math.abs(dx) >= Math.abs(dy)) {
+      face((dx > 0)? Direction.EAST : Direction.WEST);
     } else {
       face((dy > 0)? Direction.NORTH : Direction.SOUTH);
     }

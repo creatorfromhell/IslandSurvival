@@ -96,11 +96,14 @@ public class Rabbit extends LivingEntity implements Prey, Herdable, HerdLeader {
       internalX += dx * (speed + 70f) * delta;
       internalY += dy * (speed + 70f) * delta;
 
-      //update the location and direction for the move
+      //update the location and direction for the move if not the same tile
+      final Location currentTile = location();
       final Location newLoc = new Location((int) internalX, (int) internalY);
-      updateDirectionFromMove(location(), newLoc);
-      move(newLoc);
 
+      if(!newLoc.equals(currentTile)) {
+        updateDirectionFromMove(currentTile, newLoc);
+        move(newLoc);
+      }
       this.moving = true;
       return;
     }
@@ -132,9 +135,14 @@ public class Rabbit extends LivingEntity implements Prey, Herdable, HerdLeader {
         internalX += dirX * speed * delta;
         internalY += dirY * speed * delta;
 
+        //update the location and direction for the move if not the same tile
+        final Location currentTile = location();
         final Location newLoc = new Location((int) internalX, (int) internalY);
-        updateDirectionFromMove(location(), newLoc);
-        move(newLoc);
+
+        if(!newLoc.equals(currentTile)) {
+          updateDirectionFromMove(currentTile, newLoc);
+          move(newLoc);
+        }
         this.moving = true;
       }
     }
@@ -159,14 +167,16 @@ public class Rabbit extends LivingEntity implements Prey, Herdable, HerdLeader {
   @Override
   public void joinHerd(final Herdable leader) {
     this.herdLeader = leader;
-    if (leader instanceof final HerdLeader hl) {
+    if(leader instanceof final HerdLeader hl) {
+
       hl.getHerdMembers().add(this);
     }
   }
 
   @Override
   public void leaveHerd() {
-    if (herdLeader instanceof final HerdLeader hl) {
+    if(herdLeader instanceof final HerdLeader hl) {
+
       hl.getHerdMembers().remove(this);
     }
     this.herdLeader = null;
@@ -184,7 +194,7 @@ public class Rabbit extends LivingEntity implements Prey, Herdable, HerdLeader {
 
   @Override
   public Set<Herdable> getHerdMembers() {
-    return Collections.unmodifiableSet(herdMembers);
+    return herdMembers;
   }
 
   @Override

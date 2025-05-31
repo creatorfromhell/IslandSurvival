@@ -44,7 +44,13 @@ public class EntityManager {
     entities.put(player.identifier(), player);
 
     final Rabbit rabbit = new Rabbit();
+    rabbit.joinHerd(rabbit);
+
+    final Rabbit rabbit1 = new Rabbit();
+    rabbit1.joinHerd(rabbit);
+
     entities.put(rabbit.identifier(), rabbit);
+    entities.put(rabbit1.identifier(), rabbit1);
   }
 
   public Map<UUID, Entity> entities() {
