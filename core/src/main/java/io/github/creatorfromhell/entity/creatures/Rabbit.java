@@ -20,15 +20,19 @@ package io.github.creatorfromhell.entity.creatures;
 import io.github.creatorfromhell.GameManager;
 import io.github.creatorfromhell.client.render.entity.RabbitRenderer;
 import io.github.creatorfromhell.entity.LivingEntity;
+import io.github.creatorfromhell.entity.Player;
 import io.github.creatorfromhell.entity.behaviour.Behaviour;
 import io.github.creatorfromhell.entity.behaviour.impl.FleeBehaviour;
 import io.github.creatorfromhell.entity.traits.HerdLeader;
 import io.github.creatorfromhell.entity.traits.Herdable;
+import io.github.creatorfromhell.entity.traits.Predator;
 import io.github.creatorfromhell.entity.traits.Prey;
 import io.github.creatorfromhell.util.location.Location;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
@@ -42,6 +46,8 @@ import static io.github.creatorfromhell.registry.TileTypeRegistry.TILE_SIZE;
  * @since 0.0.1.0
  */
 public class Rabbit extends LivingEntity implements Prey, Herdable, HerdLeader {
+
+  private final Map<Class<? extends Predator>, Integer> predators = new HashMap<>();
 
   private Herdable herdLeader;
   private final Set<Herdable> herdMembers = new HashSet<>();
@@ -68,20 +74,24 @@ public class Rabbit extends LivingEntity implements Prey, Herdable, HerdLeader {
     this.location = new Location(10, 10);
 
     //this.behavior = new WanderBehaviour();
+
+    predators.put(Player.class, 5);
   }
 
   @Override
   public void update(final float delta) {
+
+    //TODO: Fine tune the movement algorithms
     if(behavior != null) {
 
       behavior.update(this, delta);
     }
 
-    if(shouldFlee()) {
+    final Optional<Predator> closePredator = nearPredator(location);
+    if(closePredator.isPresent() && closePredator.get() instanceof final LivingEntity living) {
 
-      final Location playerLoc = GameManager.instance().player().location();
-      float dx = internalX - playerLoc.x();
-      float dy = internalY - playerLoc.y();
+      float dx = internalX - living.location().x();
+      float dy = internalY - living.location().y();
       final float len = (float) Math.sqrt(dx * dx + dy * dy);
       if(len > 0) {
 
@@ -145,22 +155,6 @@ public class Rabbit extends LivingEntity implements Prey, Herdable, HerdLeader {
     }
   }
 
-  private boolean shouldFlee() {
-
-    // Convert rabbit's internal float position to tile coordinates
-    final int rabbitTileX = (int) (internalX / TILE_SIZE);
-    final int rabbitTileY = (int) (internalY / TILE_SIZE);
-
-    // Convert player location to tile coordinates using built-in asTile()
-    final Location playerTile = GameManager.instance().player().location().asTile();
-
-    final int dx = playerTile.x() - rabbitTileX;
-    final int dy = playerTile.y() - rabbitTileY;
-    final float distance = (float) Math.sqrt(dx * dx + dy * dy);
-
-    return distance <= 10;
-  }
-
   @Override
   public void joinHerd(final Herdable leader) {
     this.herdLeader = leader;
@@ -192,6 +186,18 @@ public class Rabbit extends LivingEntity implements Prey, Herdable, HerdLeader {
   @Override
   public Set<Herdable> getHerdMembers() {
     return herdMembers;
+  }
+
+  /**
+   * Retrieves a map of predators and their associated flee distance.
+   *
+   * @return A map where the key is the class of the predator and the value is the distance which
+   * the prey item will flee from the predator.
+   */
+  @Override
+  public Map<Class<? extends Predator>, Integer> predators() {
+
+    return predators;
   }
 
   @Override
