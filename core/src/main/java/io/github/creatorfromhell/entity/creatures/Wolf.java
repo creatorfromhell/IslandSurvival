@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
  * @author creatorfromhell
  * @since 0.0.1.0
  */
-public class Wolf extends LivingEntity implements Predator, Moveable, Damageable {
+public class Wolf extends LivingEntity implements Predator, Moveable {
 
   private final boolean isDecoy;
   private Behaviour behavior;
@@ -95,38 +95,5 @@ public class Wolf extends LivingEntity implements Predator, Moveable, Damageable
 
   public void setBehavior(final Behaviour behavior) {
     this.behavior = behavior;
-  }
-
-  /**
-   * Checks if the entity is alive.
-   *
-   * @return true if the entity is alive, false otherwise
-   */
-  @Override
-  public boolean isAlive() {
-
-    return false;
-  }
-
-  /**
-   * Inflicts damage on the entity with the specified amount and source of damage.
-   *
-   * @param damage       The amount of damage to inflict on the entity as a float.
-   * @param damageSource The entity responsible for the damage, can be null if not applicable.
-   */
-  @Override
-  public void damage(final float damage, @Nullable final LivingEntity damageSource) {
-
-  }
-
-  /**
-   * Kills the living entity, marking it as dead in the game world.
-   *
-   * @param killer The entity that caused the death of the living entity, can be null if death was
-   *               not caused by another entity.
-   */
-  @Override
-  public void kill(@Nullable final LivingEntity killer) {
-
   }
 }

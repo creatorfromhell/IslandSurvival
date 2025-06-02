@@ -156,7 +156,7 @@ public class Rabbit extends LivingEntity implements Prey, Herdable, HerdLeader {
   }
 
   @Override
-  public void joinHerd(final Herdable leader) {
+  public void joinHerd(final @NotNull Herdable leader) {
     this.herdLeader = leader;
     if(leader instanceof final HerdLeader hl) {
 

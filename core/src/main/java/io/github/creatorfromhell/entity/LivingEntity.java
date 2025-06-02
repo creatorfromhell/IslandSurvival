@@ -17,9 +17,11 @@ package io.github.creatorfromhell.entity;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import io.github.creatorfromhell.entity.traits.Damageable;
 import io.github.creatorfromhell.entity.traits.Moveable;
 import io.github.creatorfromhell.util.location.Location;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * LivingEntity
@@ -27,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
  * @author creatorfromhell
  * @since 0.0.1.0
  */
-public abstract class LivingEntity extends Entity implements Moveable {
+public abstract class LivingEntity extends Entity implements Moveable, Damageable {
   protected float speed = 150f;
   protected boolean moving = false;
 
@@ -149,5 +151,48 @@ public abstract class LivingEntity extends Entity implements Moveable {
   public void decelerate(final float speed) {
 
     this.speed -= speed;
+  }
+
+  /**
+   * Checks if the entity is alive.
+   *
+   * @return true if the entity is alive, false otherwise
+   */
+  @Override
+  public boolean isAlive() {
+
+    return health > 0.0f;
+  }
+
+  /**
+   * Kills the living entity, marking it as dead in the game world.
+   *
+   * @param killer The entity that caused the death of the living entity, can be null if death was
+   *               not caused by another entity.
+   */
+  @Override
+  public void kill(@Nullable final LivingEntity killer) {
+    this.health = 0.0f;
+
+    //TODO: Tracking for killer?
+  }
+
+  /**
+   * Inflicts damage on the entity with the specified amount and source of damage.
+   *
+   * @param damage       The amount of damage to inflict on the entity as a float.
+   * @param damageSource The entity responsible for the damage, can be null if not applicable.
+   */
+  @Override
+  public void damage(final float damage, @Nullable final LivingEntity damageSource) {
+
+    if(isAlive()) {
+      health -= damage;
+
+      if(health <= 0.0f) {
+
+        kill(damageSource);
+      }
+    }
   }
 }
