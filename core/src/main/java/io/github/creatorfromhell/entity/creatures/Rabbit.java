@@ -135,7 +135,7 @@ public class Rabbit extends LivingEntity implements Prey, Herdable, HerdLeader {
       }
     } else {
       wanderTime += delta;
-      if (wanderTime >= wanderDuration) {
+      if(wanderTime >= wanderDuration) {
         isPaused = true;
         pauseTime = 0;
       } else {

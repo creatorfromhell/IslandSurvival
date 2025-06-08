@@ -39,7 +39,7 @@ public class BiomeGenerator {
       final float moistDiff = moisture - biome.moisture();
       final float dist = tempDiff * tempDiff + moistDiff * moistDiff;
 
-      if (dist < bestDistance) {
+      if(dist < bestDistance) {
         best = biome;
         bestDistance = dist;
       }

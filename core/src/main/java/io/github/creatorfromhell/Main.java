@@ -2,6 +2,8 @@ package io.github.creatorfromhell;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import io.github.creatorfromhell.data.MongoDatabaseManager;
+import io.github.creatorfromhell.world.World;
 
 public class Main extends ApplicationAdapter {
 
@@ -11,6 +13,12 @@ public class Main extends ApplicationAdapter {
 
   @Override
   public void create() {
+
+    MongoDatabaseManager.connect();
+    MongoDatabaseManager.initialize();
+    final World world = new World();
+    world.load(); // load from Mongo
+    WorldManager.set(world); // make globally accessible
 
     manager.create();
   }

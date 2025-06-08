@@ -39,7 +39,7 @@ public class WorldGenerator {
    */
   public Tile getTileType(final int x, final int y) {
     //final float height = terrainGen.getHeight(x, y);
-    // if (height < seaLevel) {
+    // if(height < seaLevel) {
     //    return TileType.WATER;
     //}
     final float height = terrainGen.getHeight(x, y);
@@ -60,7 +60,7 @@ public class WorldGenerator {
     final Biome biome = biomeGen.getBiomeAt(x, y);
     final Tile tile = TileTypeRegistry.get(biome.surfaceTile());
 
-    if (tile == null) {
+    if(tile == null) {
       System.err.println("Unknown tile type for biome: " + biome.id() + " -> " + biome.surfaceTile());
       return TileTypeRegistry.get("core:grass"); // fallback
     }
